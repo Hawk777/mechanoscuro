@@ -8,10 +8,24 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://scripts/Tile.gd"
+} ]
+_global_script_class_icons={
+"Tile": ""
+}
+
 [application]
 
 config/name="GGJ 2022"
 config/icon="res://icon.png"
+
+[autoload]
+
+Constants="*res://constants.gd"
 
 [display]
 
