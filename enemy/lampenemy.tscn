@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://enemy/lampenemy-idle.png" type="Texture" id=1]
+[ext_resource path="res://enemy/lampenemy.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 31, 31 )
+
+[node name="AnimatedSprite" type="AnimatedSprite"]
+position = Vector2( 32, 32 )
+frames = SubResource( 3 )
+animation = "idle"
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )

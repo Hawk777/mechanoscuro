@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "enemy",
 "language": "GDScript",
 "path": "res://enemy/enemy.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "lampEnemy",
+"language": "GDScript",
+"path": "res://enemy/lampenemy.gd"
 } ]
 _global_script_class_icons={
 "Tile": "",
 "TileGrid": "",
-"enemy": ""
+"enemy": "",
+"lampEnemy": ""
 }
 
 [application]
