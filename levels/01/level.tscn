@@ -26,8 +26,6 @@ script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
-frame = 1
-tile_grid = NodePath("../TileMap")
 
 [node name="Doors" type="Node" parent="."]
 
