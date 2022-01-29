@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://restart_support/overlay.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export(float) var delay_seconds = 1.0
+
+var _blanking := true
+var _progress := 0.0
+
+onready var _overlay = $Overlay as CanvasItem
+onready var _progress_bar := $Overlay/ProgressBar as ProgressBar
+
+
+func _process(delta: float) -> void:
+	var pressed := Input.is_action_pressed(\"restart_level\")
+	if pressed and not _blanking:
+		_progress = min(1.0, _progress + delta / delay_seconds)
+		_overlay.visible = true
+		_progress_bar.value = _progress
+		if _progress >= 1.0:
+			get_tree().reload_current_scene()
+	else:
+		_progress = 0.0
+		_overlay.visible = false
+		if not pressed:
+			_blanking = false
+"
+
+[node name="Node2D" type="CanvasLayer"]
+script = SubResource( 1 )
+
+[node name="Overlay" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Overlay"]
+margin_left = 366.0
+margin_top = 225.0
+margin_right = 654.0
+margin_bottom = 266.0
+max_value = 1.0
+step = 0.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
