@@ -25,6 +25,9 @@ animations = [ {
 [sub_resource type="GDScript" id=1]
 script/source = "extends AnimatedSprite
 
+signal moved()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	var motion := Vector2.ZERO
 	if event.is_action_pressed(\"move_down\"):
@@ -37,7 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		motion = Vector2(Constants.TILE_SIZE, 0)
 	if motion != Vector2.ZERO:
 		self.position += motion
-"
+		emit_signal(\"moved\")"
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 32 )
