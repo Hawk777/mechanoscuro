@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/roombg7.png-473021e96d56682ca7b6661d5a746b3a.stex"
+path="res://.import/roombg1.png-144614f3ef56960a10110d58f0697d6e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/roombg7.png"
-dest_files=[ "res://.import/roombg7.png-473021e96d56682ca7b6661d5a746b3a.stex" ]
+source_file="res://tiles/roombg1.png"
+dest_files=[ "res://.import/roombg1.png-144614f3ef56960a10110d58f0697d6e.stex" ]
 
 [params]
 
