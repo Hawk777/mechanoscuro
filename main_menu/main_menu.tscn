@@ -11,7 +11,10 @@ export(PackedScene) var first_level: PackedScene
 
 
 func _on_play() -> void:
-	get_tree().change_scene_to(first_level)
+	var error := get_tree().change_scene_to(first_level)
+	if error != OK:
+		print(error)
+		get_tree().quit(1)
 "
 
 [node name="Root" type="CanvasLayer"]
