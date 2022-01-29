@@ -11,7 +11,7 @@ var tileprefab;
 func coord2idx(x, y):
 	return x + (y * max_x)
 	
-func idx2coord(idx):
+func idx2coord(idx: int) -> Vector2:
 	return Vector2(idx % max_x, idx / max_x)
 	
 func get_tile(x, y):
