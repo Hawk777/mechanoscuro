@@ -13,6 +13,10 @@ config_version=4
 config/name="GGJ 2022"
 config/icon="res://icon.png"
 
+[autoload]
+
+Constants="*res://constants.gd"
+
 [display]
 
 window/size/height=640
