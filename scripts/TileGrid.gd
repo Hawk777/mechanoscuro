@@ -1,7 +1,6 @@
 class_name TileGrid
 extends Node
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -23,6 +22,7 @@ func _ready():
 			var t = tileprefab.instance()
 			t.xPos=n
 			t.yPos=m
+			
 			# t.position=get_node("TileMap").map_to_world(Vector2(n,m))
 			# The above line doesn't work right now, not sure how to fix it.
 			# TODO:

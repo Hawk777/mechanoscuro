@@ -58,6 +58,7 @@ extents = Vector2( 32, 32 )
 position = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "idle"
+frame = 2
 playing = true
 centered = false
 script = SubResource( 1 )
