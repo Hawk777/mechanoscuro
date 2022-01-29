@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light.png-191c2812e8968dabd6c4fd26c78b4e95.stex"
+path="res://.import/roombg1.png-144614f3ef56960a10110d58f0697d6e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/light.png"
-dest_files=[ "res://.import/light.png-191c2812e8968dabd6c4fd26c78b4e95.stex" ]
+source_file="res://tiles/roombg1.png"
+dest_files=[ "res://.import/roombg1.png-144614f3ef56960a10110d58f0697d6e.stex" ]
 
 [params]
 
