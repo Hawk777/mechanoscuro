@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Tile",
 "language": "GDScript",
 "path": "res://scripts/Tile.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "enemy",
+"language": "GDScript",
+"path": "res://enemy.gd"
 } ]
 _global_script_class_icons={
-"Tile": ""
+"Tile": "",
+"enemy": ""
 }
 
 [application]

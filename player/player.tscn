@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://player/idle.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends AnimatedSprite
+
+signal moved()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	var motion := Vector2.ZERO
+	if event.is_action_pressed(\"move_down\"):
+		motion = Vector2(0, Constants.TILE_SIZE)
+	elif event.is_action_pressed(\"move_up\"):
+		motion = Vector2(0, -Constants.TILE_SIZE)
+	elif event.is_action_pressed(\"move_left\"):
+		motion = Vector2(-Constants.TILE_SIZE, 0)
+	elif event.is_action_pressed(\"move_right\"):
+			motion = Vector2(Constants.TILE_SIZE, 0)
+	if motion != Vector2.ZERO:
+		self.position += motion
+		emit_signal(\"moved\")
+"
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32, 32 )
+
+[node name="Node2D" type="AnimatedSprite"]
+frames = SubResource( 2 )
+animation = "idle"
+playing = true
+centered = false
+script = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 32, 32 )
+shape = SubResource( 6 )
