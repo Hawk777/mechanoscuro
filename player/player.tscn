@@ -47,7 +47,7 @@ frames = SubResource( 2 )
 animation = "idle"
 frame = 1
 playing = true
-offset = Vector2( 32, 32 )
+centered = false
 script = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
