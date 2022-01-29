@@ -27,6 +27,10 @@ script/source = "extends AnimatedSprite
 
 signal moved()
 
+export(NodePath) var tile_grid: NodePath
+
+onready var tile_map := get_node(tile_grid) as TileMap
+onready var tile_set := tile_map.tile_set as TileSet
 
 func _unhandled_input(event: InputEvent) -> void:
 	var motion := Vector2.ZERO
@@ -39,16 +43,21 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed(\"move_right\"):
 		motion = Vector2(Constants.TILE_SIZE, 0)
 	if motion != Vector2.ZERO:
-		self.position += motion
-		emit_signal(\"moved\")"
+		var new_pos = self.position + motion
+		var tile_idx = tile_map.get_cell(new_pos[0] / 64, new_pos[1] / 64)
+		var shape_count = tile_set.tile_get_shape_count(tile_idx)
+		if (shape_count < 1):
+			self.position = new_pos
+			emit_signal(\"moved\")
+"
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 32 )
 
 [node name="Node2D" type="AnimatedSprite"]
+position = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 1
 playing = true
 centered = false
 script = SubResource( 1 )
