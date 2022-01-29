@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://main_menu/disabled.png" type="Texture" id=1]
+[ext_resource path="res://main_menu/speaker.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+onready var _master_bus_index := AudioServer.get_bus_index(\"master\")
+
+func _ready() -> void:
+	var _cross := get_node(\"Cross\") as TextureButton
+	_cross.set_pressed_no_signal(AudioServer.is_bus_mute(_master_bus_index))
+
+
+func _on_toggled(state: bool) -> void:
+	AudioServer.set_bus_mute(_master_bus_index, state)
+"
+
+[node name="MuteButton" type="CenterContainer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_top = -120.0
+margin_right = -100.0
+margin_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speaker" type="TextureRect" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 2 )
+
+[node name="Cross" type="TextureButton" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+toggle_mode = true
+action_mode = 0
+texture_pressed = ExtResource( 1 )
+
+[connection signal="toggled" from="Cross" to="." method="_on_toggled"]
