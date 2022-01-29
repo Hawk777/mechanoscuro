@@ -16,8 +16,12 @@ func _ready():
 	for n in range(GRID_WIDTH):
 		var Subgrid = []
 		for m in range(GRID_HEIGHT):
-			print(TileMap.get_cell(n,m))
-			#Subgrid.append()
+			var t = tileprefab.Tile(false,n,m,false,true)
+			#add_child(t)
+			#Subgrid.append(t)
+			# The intent here is to add an instance of the Tile class to the grid for each tile.
+		Grid.append(Subgrid)
+	print(Grid)
 	pass # Replace with function body.
 
 
