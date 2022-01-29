@@ -19,7 +19,7 @@ func get_tile(x, y):
 
 func coord_is_passable(x, y):
 	var tile := Grid[coord2idx(x, y)] as Tile
-	print("x: " + str(x) + " y: " + str(y) + " wall: " + str(tile.wall_tile) + " passable: " + str(tile.passable))
+	# print("x: " + str(x) + " y: " + str(y) + " wall: " + str(tile.wall_tile) + " passable: " + str(tile.passable))
 	return !tile.wall_tile && tile.passable
 
 # Called when the node enters the scene tree for the first time.
@@ -38,7 +38,7 @@ func _ready():
 	# instantiate array of correct size
 	Grid.resize(coord2idx(max_x, max_y) + 1)
 	
-	tileprefab= preload("res://Tile.tscn")
+	tileprefab = preload("res://Tile.tscn")
 	for cell in used_cells:
 		var x := cell[0] as int
 		var y := cell[1] as int

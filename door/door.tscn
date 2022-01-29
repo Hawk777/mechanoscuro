@@ -46,7 +46,7 @@ export(bool) var is_open: bool
 export(NodePath) var tile_grid: NodePath
 
 onready var _tile_grid := get_node(tile_grid) as TileGrid
-onready var _tile_position := _tile_grid.world_to_map(_tile_grid.to_local(self.to_global(self.position)))
+onready var _tile_position := _tile_grid.world_to_map(_tile_grid.to_local(self.global_position))
 
 func _ready() -> void:
 	if is_open:
