@@ -2,21 +2,35 @@
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends Node
-# An object that detects when it is stepped on by another object (player, monster, or pushable object).
+# An object that detects when it is stepped on by another object (player,
+# monster, or pushable object).
 #
-# The “stepped_on” signal is emitted each time something enters the area.
+# The “pressed” signal is emitted when it is pressed (i.e. when the first object
+# enters its area). The “released” signal is emitted when it is released (i.e.
+# when the last object leaves its area).
 
-signal stepped_on()
+signal pressed()
+signal released()
 
-func _on_area_entered(_other: Area2D) -> void:
-	emit_signal(\"stepped_on\")
+onready var _area_2d := get_node(\"Area2D\") as Area2D
+onready var _is_pressed := false
+
+func _on_enter(_other: Area2D) -> void:
+	if not _is_pressed:
+		_is_pressed = true
+		emit_signal(\"pressed\")
+
+func _on_exit(_other: Area2D) -> void:
+	if _is_pressed:
+		if _area_2d.get_overlapping_areas().empty():
+			_is_pressed = false
+			emit_signal(\"released\")
 "
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="Sprite" type="Sprite"]
-centered = false
+[node name="Node2D" type="Node2D"]
 script = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -25,4 +39,5 @@ script = SubResource( 2 )
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_enter"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_exit"]
