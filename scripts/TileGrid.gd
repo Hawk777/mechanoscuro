@@ -8,7 +8,11 @@ extends Node
 const GRID_HEIGHT=9
 const GRID_WIDTH=16
 var Grid = []
+<<<<<<< Updated upstream
 var tileprefab;
+=======
+onready var tileprefab = preload("res://Tile.tscn").instance()
+>>>>>>> Stashed changes
 # these are sample numbers based on my 64x64 tilemap.  If the size of the tiles changes or
 # you need more, change these.
 
@@ -18,6 +22,7 @@ func _ready():
 	for n in range(GRID_WIDTH):
 		var Subgrid = []
 		for m in range(GRID_HEIGHT):
+<<<<<<< Updated upstream
 			var t = tileprefab.instance()
 			t.xPos=n
 			t.yPos=m
@@ -32,6 +37,14 @@ func _ready():
 		Grid.append(Subgrid)
 	#print(Grid)
 	print(Grid[12][3].xPos)
+=======
+			var t = tileprefab.Tile(false,n,m,false,true)
+			#add_child(t)
+			#Subgrid.append(t)
+			# The intent here is to add an instance of the Tile class to the grid for each tile.
+		Grid.append(Subgrid)
+	print(Grid)
+>>>>>>> Stashed changes
 	pass # Replace with function body.
 
 
