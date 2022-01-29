@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/release.ogg-d867e2a2bb05c0c5e0801451d0fcaeaf.oggstr"
+
+[deps]
+
+source_file="res://pressure_plate/release.ogg"
+dest_files=[ "res://.import/release.ogg-d867e2a2bb05c0c5e0801451d0fcaeaf.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

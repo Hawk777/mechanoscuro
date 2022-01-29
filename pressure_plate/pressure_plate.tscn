@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://steppable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://pressure_plate/down.png" type="Texture" id=2]
+[ext_resource path="res://pressure_plate/up.png" type="Texture" id=3]
+[ext_resource path="res://pressure_plate/release.ogg" type="AudioStream" id=4]
+[ext_resource path="res://pressure_plate/press.ogg" type="AudioStream" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -42,6 +46,10 @@ func _on_released() -> void:
 
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
+up_texture = ExtResource( 3 )
+down_texture = ExtResource( 2 )
+press_sound = ExtResource( 5 )
+release_sound = ExtResource( 4 )
 
 [node name="Steppable" parent="." instance=ExtResource( 1 )]
 
