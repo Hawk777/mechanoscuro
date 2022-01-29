@@ -45,10 +45,8 @@ script/source = "extends AnimatedSprite
 export(bool) var is_open: bool
 export(NodePath) var tile_grid: NodePath
 
-onready var _tile_map := get_node(tile_grid) as TileMap
 onready var _tile_grid := get_node(tile_grid) as TileGrid
-onready var _tile_position := _tile_map.world_to_map(_tile_map.to_local(self.to_global(self.position)))
-
+onready var _tile_position := _tile_grid.world_to_map(_tile_grid.to_local(self.to_global(self.position)))
 
 func _ready() -> void:
 	if is_open:
@@ -78,7 +76,11 @@ func toggle() -> void:
 
 
 func _update_tile_passability() -> void:
-	var tile := _tile_grid.Grid[_tile_position.x as int][_tile_position.y as int] as Tile
+	var x := _tile_position.x
+	var y := _tile_position.y
+	var tile := _tile_grid.get_tile(_tile_position.x, _tile_position.y) as Tile
+	# print(\"UPDATING TILE AT x: \" + str(x) + \" y: \" + str(y) + \" wall: \" + str(tile.wall_tile) + \" old passable: \" + str(tile.passable))
+	# print(\"NEW passable value: \" + str(is_open))
 	tile.passable = is_open
 "
 
