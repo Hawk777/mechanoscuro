@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://steppable.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+# A pressure plate that makes a sound and changes appearance when pushed.
+#
+# The “pressed” signal is emitted when it is pressed (i.e. when the first object
+# enters its area). The “released” signal is emitted when it is released (i.e.
+# when the last object leaves its area).
+
+signal pressed()
+signal released()
+
+export(Texture) var up_texture
+export(Texture) var down_texture
+export(AudioStream) var press_sound
+export(AudioStream) var release_sound
+
+onready var _sprite = get_node(\"Sprite\") as Sprite
+onready var _pressed_player = get_node(\"PressedPlayer\") as AudioStreamPlayer
+onready var _released_player = get_node(\"ReleasedPlayer\") as AudioStreamPlayer
+
+func _ready() -> void:
+	_sprite.texture = up_texture
+	_pressed_player.stream = press_sound
+	_released_player.stream = release_sound
+
+
+func _on_pressed() -> void:
+	_sprite.texture = down_texture
+	_pressed_player.play()
+	emit_signal(\"pressed\")
+
+
+func _on_released() -> void:
+	_sprite.texture = up_texture
+	_released_player.play()
+	emit_signal(\"released\")
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="Steppable" parent="." instance=ExtResource( 1 )]
+
+[node name="Sprite" type="Sprite" parent="."]
+offset = Vector2( 32, 32 )
+
+[node name="PressedPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="ReleasedPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Steppable" to="." method="_on_pressed"]
+[connection signal="released" from="Steppable" to="." method="_on_released"]
