@@ -43,21 +43,31 @@ animations = [ {
 script/source = "extends AnimatedSprite
 
 export(bool) var is_open: bool
+export(NodePath) var tile_grid: NodePath
+
+onready var _tile_map := get_node(tile_grid) as TileMap
+onready var _tile_grid := get_node(tile_grid) as TileGrid
+onready var _tile_position := _tile_map.world_to_map(_tile_map.to_local(self.to_global(self.position)))
 
 
 func _ready() -> void:
 	if is_open:
 		self.animation = \"close\"
+	_update_tile_passability()
 
 
 func open() -> void:
-	is_open = true
-	self.play(\"open\")
+	if not is_open:
+		is_open = true
+		_update_tile_passability()
+		self.play(\"open\")
 
 
 func close() -> void:
-	is_open = false
-	self.play(\"close\")
+	if is_open:
+		is_open = false
+		_update_tile_passability()
+		self.play(\"close\")
 
 
 func toggle() -> void:
@@ -65,7 +75,11 @@ func toggle() -> void:
 		close()
 	else:
 		open()
-"
+
+
+func _update_tile_passability() -> void:
+	var tile := _tile_grid.Grid[_tile_position.x as int][_tile_position.y as int] as Tile
+	tile.passable = is_open"
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
 frames = SubResource( 7 )
