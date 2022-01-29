@@ -13,6 +13,13 @@ config_version=4
 config/name="GGJ 2022"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=640
+window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 move_left={
