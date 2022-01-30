@@ -7,19 +7,35 @@ script/source = "extends CanvasLayer
 
 
 func _ready() -> void:
-	($TextureRect as CanvasItem).visible = false
+	($Container as CanvasItem).visible = false
 
 
 func show() -> void:
-	($TextureRect as CanvasItem).visible = true
+	($Container as CanvasItem).visible = true
 "
 
 [node name="Control" type="CanvasLayer"]
 script = SubResource( 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Container" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+margin_right = 1024.0
+margin_bottom = 640.0
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
