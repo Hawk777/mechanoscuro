@@ -19,18 +19,18 @@ func _ready() -> void:
 
 
 func checkMoveX():
-	if player.position.x - position.x > 10:
+	if player.global_position.x - global_position.x > 10:
 		#10 is a sample value
 		return Vector2(Constants.TILE_SIZE, 0)
-	elif player.position.x - position.x < -10:
+	elif player.global_position.x - global_position.x < -10:
 		return Vector2(-Constants.TILE_SIZE, 0)
 	return Vector2.ZERO
 	
 func checkMoveY():
-	if player.position.y - position.y > 10:
+	if player.global_position.y - global_position.y > 10:
 		#10 is a sample value
 		return Vector2(0, Constants.TILE_SIZE)
-	elif player.position.y - position.y < -10:
+	elif player.global_position.y - global_position.y < -10:
 		return Vector2(0, -Constants.TILE_SIZE)
 	return Vector2.ZERO
 	
@@ -53,8 +53,8 @@ func _on_Player_moved():
 		_move_by(motion)
 	# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
 	# possibly just cheat and check exactly 3 or 4 tiles in each direction?  That should probably work, even if it's not all the way accurate
-		var player_grid := tilemap.world_to_map(player.position)
-		var self_grid := tilemap.world_to_map(position)
+		var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
+		var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
 		if abs(player_grid.x-self_grid.x) < 4 and abs(player_grid.y) < 10 and tilemap.Grid[player_grid.x][player_grid.y].isLit:
 			alert=true
 			play("alert")
