@@ -30,6 +30,8 @@ extents = Vector2( 31, 31 )
 [node name="AnimatedSprite" type="AnimatedSprite"]
 frames = SubResource( 3 )
 animation = "idle"
+frame = 1
+playing = true
 centered = false
 script = ExtResource( 2 )
 alert_sound = ExtResource( 5 )
