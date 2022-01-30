@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://tiles/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://restart_support/restart_support.tscn" type="PackedScene" id=4]
+[ext_resource path="res://lighting/lighting_support.tscn" type="PackedScene" id=5]
+[ext_resource path="res://door/door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://pressure_plate/pressure_plate.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+z_as_relative = false
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 2, 0, 3, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 262148, 7, 0, 196612, 8, 0, 262149, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 14, 0, 2, 15, 0, 1, 65536, 0, 65538, 65537, 2, 0, 65538, 0, 6, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 0, 65543, 65543, 0, 196613, 65544, 0, 327683, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 0, 65538, 131072, 0, 65538, 131073, 2, 0, 131074, 2, 0, 131075, 1, 0, 131076, 0, 196614, 131077, 1, 0, 131078, 1, 0, 131079, 2, 0, 131080, 0, 65538, 131081, 1, 0, 131082, 1, 0, 131083, 0, 196614, 131084, 1, 0, 131085, 0, 65541, 131086, 1, 0, 131087, 0, 65538, 196608, 0, 262146, 196609, 0, 196612, 196610, 0, 131079, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 0, 65541, 196615, 2, 0, 196616, 0, 65538, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 1, 0, 196621, 0, 65538, 196622, 1, 0, 196623, 0, 65538, 262144, 0, 327682, 262145, 0, 196613, 262146, 0, 327685, 262147, 0, 2, 262148, 0, 2, 262149, 0, 2, 262150, 0, 65537, 262151, 2, 0, 262152, 0, 65538, 262153, 2, 0, 262154, 0, 65542, 262155, 0, 2, 262156, 0, 3, 262157, 0, 65537, 262158, 1, 0, 262159, 0, 65538, 327680, 0, 65538, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 327688, 0, 65538, 327689, 2, 0, 327690, 2, 0, 327691, 2, 0, 327692, 0, 65538, 327693, 1, 0, 327694, 1, 0, 327695, 0, 65538, 393216, 0, 65538, 393217, 1, 0, 393218, 1, 0, 393219, 1, 0, 393220, 0, 0, 393221, 0, 2, 393222, 0, 2, 393223, 0, 2, 393224, 0, 65537, 393225, 2, 0, 393226, 0, 196614, 393227, 2, 0, 393228, 0, 65538, 393229, 1, 0, 393230, 0, 65542, 393231, 0, 65540, 458752, 0, 65538, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 0, 65538, 458757, 1, 0, 458758, 2, 0, 458759, 2, 0, 458760, 2, 0, 458761, 2, 0, 458762, 2, 0, 458763, 2, 0, 458764, 0, 65538, 458765, 1, 0, 458766, 1, 0, 458767, 0, 65538, 524288, 0, 65538, 524289, 1, 0, 524290, 0, 196614, 524291, 1, 0, 524292, 0, 6, 524293, 1, 0, 524294, 0, 0, 524295, 0, 2, 524296, 0, 5, 524297, 2, 0, 524298, 0, 196614, 524299, 2, 0, 524300, 0, 65539, 524301, 0, 5, 524302, 2, 0, 524303, 0, 65538, 589824, 0, 65538, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 0, 65538, 589831, 2, 0, 589832, 2, 0, 589833, 2, 0, 589834, 2, 0, 589835, 2, 0, 589836, 0, 65538, 589837, 2, 0, 589838, 2, 0, 589839, 0, 65538, 655360, 0, 65536, 655361, 0, 2, 655362, 0, 2, 655363, 0, 2, 655364, 0, 2, 655365, 0, 2, 655366, 0, 4, 655367, 0, 2, 655368, 0, 2, 655369, 0, 2, 655370, 0, 2, 655371, 0, 2, 655372, 0, 4, 655373, 0, 2, 655374, 0, 2, 655375, 0, 65537 )
+script = ExtResource( 9 )
+
+[node name="LightingSupport" parent="." instance=ExtResource( 5 )]
+tile_data = PoolIntArray( 262153, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393225, 0, 0, 393227, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 524297, 0, 0, 524299, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0 )
+tile_grid_path = NodePath("../TileMap")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 576, 256 )
+tile_grid = NodePath("../../TileMap")
+
+[node name="Plates" type="Node2D" parent="."]
+
+[node name="PressurePlate" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 448, 576 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 384, 128 )
+frame = 1
+player_path = NodePath("../../Player")
+tile_grid_path = NodePath("../../TileMap")
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 320, 448 )
+frame = 0
+player_path = NodePath("../../Player")
+tile_grid_path = NodePath("../../TileMap")
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 896, 256 )
+frame = 0
+player_path = NodePath("../../Player")
+tile_grid_path = NodePath("../../TileMap")
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 64, 64 )
+frame = 2
+tile_grid_path = NodePath("../TileMap")
+
+[node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
+
+[node name="RestartSupport" parent="." instance=ExtResource( 4 )]
+
+[connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
+[connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]
+[connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]

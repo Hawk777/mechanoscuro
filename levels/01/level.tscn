@@ -44,13 +44,13 @@ position = Vector2( 448, 256 )
 
 [node name="Enemy" parent="." instance=ExtResource( 9 )]
 position = Vector2( 640, 320 )
-frame = 0
+frame = 1
 player_path = NodePath("../Player")
 tile_grid_path = NodePath("../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
-frame = 1
+frame = 0
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
