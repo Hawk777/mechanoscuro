@@ -6,10 +6,10 @@ var max_y := 0
 var Grid := []
 
 func coord2idx(x: int, y: int) -> int:
-	return x + (y * max_x)
+	return x + (y * (max_x + 1))
 	
 func idx2coord(idx: int) -> Vector2:
-	return Vector2(idx % max_x, idx / max_x)
+	return Vector2(idx % (max_x + 1), idx / (max_x + 1))
 	
 func get_tile(x: int, y: int) -> Tile:
 	return Grid[coord2idx(x, y)]
