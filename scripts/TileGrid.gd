@@ -1,8 +1,6 @@
 class_name TileGrid
 extends TileMap
 
-# var tile_set := self.tile_set as TileSet
-
 var max_x := 0
 var max_y := 0
 var Grid := []
