@@ -9,3 +9,4 @@ var passable := true
 var occupant: Node = null
 var remembered := false
 var lamped :=false
+var doubleLamped :=false

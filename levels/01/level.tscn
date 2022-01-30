@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://door/door.tscn" type="PackedScene" id=2]
@@ -9,7 +9,9 @@
 [ext_resource path="res://lighting/lighting_support.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://screen_effects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screen_effects/screen_effects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/level1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://exit/exit.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -43,6 +45,11 @@ position = Vector2( 128, 128 )
 [node name="DeathPlate" parent="Plates" instance=ExtResource( 3 )]
 position = Vector2( 448, 256 )
 
+[node name="Exit" parent="." instance=ExtResource( 12 )]
+position = Vector2( 64, 256 )
+next_scene = ExtResource( 11 )
+screen_effects_path = NodePath("../ScreenEffects")
+
 [node name="Enemy" parent="." instance=ExtResource( 9 )]
 position = Vector2( 640, 320 )
 frame = 2
@@ -54,7 +61,7 @@ position = Vector2( 64, 64 )
 
 tile_grid_path = NodePath("../TileMap")
 
-[node name="FogOfWar" parent="." instance=ExtResource( 10 )]
+[node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
 tile_grid_path = NodePath("../TileMap")
 player_path = NodePath("../Player")
 
