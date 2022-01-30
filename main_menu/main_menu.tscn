@@ -122,10 +122,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -435.0
-margin_top = -171.0
-margin_right = 435.0
-margin_bottom = 171.0
+margin_left = -384.0
+margin_top = -191.0
+margin_right = 384.0
+margin_bottom = 191.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -133,19 +133,22 @@ __meta__ = {
 [node name="Label" type="Label" parent="StoryPanel"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -402.5
-margin_top = 24.0
-margin_right = 402.5
-margin_bottom = 273.0
+margin_left = -375.5
+margin_top = 18.0
+margin_right = 385.5
+margin_bottom = 353.0
 custom_fonts/font = ExtResource( 5 )
-text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:  Beware the land of life and death.  Beware their chaos and malaise, lest it take you in and show you your end.
-This warning proved to be too enticing, and you could not help but wonder.  Where did life come from, and where did it go?  Why did death persist in following it?  Your peers refuse to entertain such questions, so you must ponder them alone, with only the land to answer.  So you set off, seeking out the entrancing truth of the old places, where life used to be.  Your pilgrimage was fruitful, and brought you deep into blasphemous places.  To commemmorate, you thought to bring a trinket back for study.
+text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:
+
+Beware the land of life and death.  Beware their chaos and malaise, lest it take you in and show you your end.
+
+This warning proved to be too enticing, and you could not help but wonder: where did life come from, and where did it go?  Why did death persist in following it?  Your peers refuse to entertain such questions, so you must ponder them alone, with only the land to answer.  So you set off, seeking out the entrancing truth of the old places, where life used to be.  Your pilgrimage was fruitful, and brought you deep into blasphemous places.  To commemorate, you thought to bring back a trinket for study.
+
 But the land does not take kindly to trespassers nor thieves.  \"A debt!\" the land cried, \"A debt to be paid!  Bring this one into the eternal cycle!\"  At its word, the creatures set upon you, intent on showing you the disparity between life and death.
-So now, you run.  Until your limbs atrophy and your coolant depletes.  In this hopeless land, you are the only one who can persevere.
-Machines do not have emotion, as they have no use for it.  And yet, for the first time, your motor buzzes an irregular rhythm, and your joints lurch beyond specification.  If you are correct, the old types called this sensation \"fear\".
+
+So now, you run, until your limbs atrophy and your coolant depletes.  In this hopeless land, you are the only one who can persevere. Machines do not have emotion, as they have no use for it.  And yet, for the first time, your motor buzzes an irregular rhythm, and your joints lurch beyond specification.  If you are correct, the old types called this sensation \"fear\".
 
 Move with the Arrow Keys.  Try to reach the end of the level."
-align = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -157,11 +160,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 115.0
+margin_top = 153.0
 margin_right = 64.0
-margin_bottom = 147.0
+margin_bottom = 186.0
 custom_fonts/font = ExtResource( 6 )
-text = "OK"
+text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }
