@@ -90,63 +90,64 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 64, 192 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 192, 192 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 128, 832 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 576 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 832 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 640 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 64 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy8" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 64 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 1024, 768 )
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 128, 64 )
-frame = 2
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 12 )]
@@ -170,12 +171,3 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door9" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door10" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
-[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy4" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy5" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy6" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy7" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy8" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/LampEnemy1" method="_on_Player_moved"]
