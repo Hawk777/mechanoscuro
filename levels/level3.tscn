@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://pressure_plate/pressure_plate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
+[ext_resource path="res://screen_effects/screen_effects.tscn" type="PackedScene" id=10]
+[ext_resource path="res://exit/exit.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/level4.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,6 +25,11 @@ script = ExtResource( 9 )
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
 tile_data = PoolIntArray( 262153, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393225, 0, 0, 393227, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 524297, 0, 0, 524299, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
+
+[node name="Exit" parent="." instance=ExtResource( 11 )]
+position = Vector2( 832, 576 )
+next_scene = ExtResource( 12 )
+screen_effects_path = NodePath("../ScreenEffects")
 
 [node name="Plates" type="Node2D" parent="."]
 
@@ -59,6 +67,10 @@ position = Vector2( 64, 64 )
 frame = 2
 tile_grid_path = NodePath("../TileMap")
 
+[node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
+tile_grid_path = NodePath("../TileMap")
+player_path = NodePath("../Player")
+
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
 
 [node name="RestartSupport" parent="." instance=ExtResource( 4 )]
@@ -67,3 +79,6 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
+[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
