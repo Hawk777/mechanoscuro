@@ -19,7 +19,6 @@ func get_tile(x: int, y: int) -> Tile:
 
 func coord_is_passable(x: int, y: int) -> bool:
 	var tile := Grid[coord2idx(x, y)] as Tile
-	# print("x: " + str(x) + " y: " + str(y) + " wall: " + str(tile.wall_tile) + " passable: " + str(tile.passable))
 	return !tile.wall_tile && tile.passable
 
 # Called when the node enters the scene tree for the first time.
