@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/dead_overlay.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+
+func _ready() -> void:
+	($TextureRect as CanvasItem).visible = false
+
+
+func show() -> void:
+	($TextureRect as CanvasItem).visible = true
+"
+
+[node name="Control" type="CanvasLayer"]
+script = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

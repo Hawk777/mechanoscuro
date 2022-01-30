@@ -1,20 +1,30 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://player/idle.png" type="Texture" id=1]
+[ext_resource path="res://player/explosion.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=2]
@@ -23,32 +33,53 @@ animations = [ {
 "loop": true,
 "name": "idle",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "explode",
+"speed": 5.0
 } ]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=10]
 script/source = "extends AnimatedSprite
 
 signal moved()
+signal death_started()
+signal death_finished()
 
 export(NodePath) var tile_grid_path: NodePath
 
+var _alive := true
+
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 
+
 func _unhandled_input(event: InputEvent) -> void:
-	var motion := Vector2.ZERO
-	if event.is_action_pressed(\"move_down\"):
-		motion = Vector2(0, Constants.TILE_SIZE)
-	elif event.is_action_pressed(\"move_up\"):
-		motion = Vector2(0, -Constants.TILE_SIZE)
-	elif event.is_action_pressed(\"move_left\"):
-		motion = Vector2(-Constants.TILE_SIZE, 0)
-	elif event.is_action_pressed(\"move_right\"):
-		motion = Vector2(Constants.TILE_SIZE, 0)
-	if motion != Vector2.ZERO:
-		var new_pos = self.position + motion
-		if (_tile_grid.coord_is_passable(new_pos[0] / 64, new_pos[1] / 64)):
-			self.position = new_pos
-			emit_signal(\"moved\")
+	if _alive:
+		var motion := Vector2.ZERO
+		if event.is_action_pressed(\"move_down\"):
+			motion = Vector2(0, Constants.TILE_SIZE)
+		elif event.is_action_pressed(\"move_up\"):
+			motion = Vector2(0, -Constants.TILE_SIZE)
+		elif event.is_action_pressed(\"move_left\"):
+			motion = Vector2(-Constants.TILE_SIZE, 0)
+		elif event.is_action_pressed(\"move_right\"):
+			motion = Vector2(Constants.TILE_SIZE, 0)
+		if motion != Vector2.ZERO:
+			var new_pos = self.position + motion
+			if (_tile_grid.coord_is_passable(new_pos[0] / 64, new_pos[1] / 64)):
+				self.position = new_pos
+				emit_signal(\"moved\")
+
+
+func kill() -> void:
+	if _alive:
+		_alive = false
+		emit_signal(\"death_started\")
+		self.play(\"explode\")
+		yield(self, \"animation_finished\")
+		self.visible = false
+		emit_signal(\"death_finished\")
 "
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -58,10 +89,9 @@ extents = Vector2( 32, 32 )
 position = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 2
 playing = true
 centered = false
-script = SubResource( 1 )
+script = SubResource( 10 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
