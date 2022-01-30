@@ -148,7 +148,6 @@ func _refresh() -> void:
 			else:
 				# The player knows nothing about this tile.
 				_image.set_pixelv(tile_grid, Color8(_PixelValue.BLACK, 0, 0))
-		print_debug(_image.get_data())
 		_image.unlock()
 
 		# Ship the new data to the shader.
