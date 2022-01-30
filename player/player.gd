@@ -14,6 +14,11 @@ var _frozen := false
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer
 
+onready var doors := get_tree().get_nodes_in_group("doors")
+onready var plates := get_tree().get_nodes_in_group("plates")
+onready var reg_enemies := get_tree().get_nodes_in_group("reg_enemies")
+onready var lamp_enemies := get_tree().get_nodes_in_group("lamp_enemies")
+
 func _ready() -> void:
 	_dead_player.stream=dead_sound
 	_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = self
@@ -47,9 +52,24 @@ func _unhandled_input(event: InputEvent) -> void:
 				if new_tile.occupant == null:
 					new_tile.occupant = self
 					emit_signal("moved")
+					run_turn()
 				else:
 					kill()
 
+func run_turn():
+	handle_switch_step()
+	move_lamp_enemies()
+	move_reg_enemies()
+	
+func handle_switch_step():
+	pass
+	
+func move_lamp_enemies():
+	for lamp_enemy in lamp_enemies:
+		print(str(lamp_enemy))
+	
+func move_reg_enemies():
+	pass
 
 func freeze() -> void:
 	_frozen = true
