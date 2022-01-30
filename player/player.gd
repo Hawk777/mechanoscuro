@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func is_in_light() -> bool:
 	var tile := _tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position)))
-	return tile.isLit
+	return tile.isLit || tile.lamped
 	
 func get_coordinates() -> Vector2:
 	return _tile_grid.world_to_map(_tile_grid.to_local(global_position))
