@@ -21,8 +21,7 @@ tile_data = PoolIntArray( 0, 0, 7, 1, 0, 262149, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0
 script = ExtResource( 9 )
 
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
-visible = false
-tile_data = PoolIntArray( 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131078, 0, 0, 131080, 0, 0, 196614, 0, 0, 196616, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458766, 0, 0, 524295, 0, 0, 524299, 0, 0, 524302, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0 )
+tile_data = PoolIntArray( 131080, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
 
 [node name="Plates" type="Node2D" parent="."]
@@ -62,28 +61,23 @@ preferredAxis = "x"
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 256, 64 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
-directionFacing = Vector2( 0, 1 )
 
 [node name="LampEnemy2" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 192, 384 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, 1 )
 
 [node name="LampEnemy3" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 64, 384 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
 
 [node name="LampEnemy4" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 512, 256 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
