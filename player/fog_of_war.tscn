@@ -163,3 +163,4 @@ material = SubResource( 3 )
 scale = Vector2( 1024, 640 )
 centered = false
 script = SubResource( 4 )
+blurred_mipmap_lod = 2.0
