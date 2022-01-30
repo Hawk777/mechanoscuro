@@ -21,13 +21,13 @@ script = ExtResource( 4 )
 tile_data = PoolIntArray( 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
 
-[node name="Doors" type="Node" parent="."]
+[node name="Doors" type="Node2D" parent="."]
 
 [node name="Door" parent="Doors" instance=ExtResource( 2 )]
 position = Vector2( 448, 192 )
 tile_grid = NodePath("../../TileMap")
 
-[node name="Plates" type="Node" parent="."]
+[node name="Plates" type="Node2D" parent="."]
 
 [node name="PressurePlate" parent="Plates" instance=ExtResource( 3 )]
 position = Vector2( 128, 128 )
