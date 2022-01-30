@@ -1,5 +1,6 @@
 extends Node2D
 
+export(PackedScene) var main_menu: PackedScene
 export(AudioStream) var switch_unpress
 export(AudioStream) var monster_dealert
 export(AudioStream) var monster_alert
@@ -66,7 +67,10 @@ func _on_Timer_timeout():
 			_sound_player.stream=level_complete
 			_sound_player.play()
 		6:
-			return
+			check+=1
+			timer.start(8)
+		7:
+			get_tree().change_scene_to(main_menu)
 func _on_FadeTimer_timeout():
 	print("fade")
 	var currDark
@@ -85,7 +89,8 @@ func _on_FadeTimer_timeout():
 			currDark = get_node("Dark5")
 		6:
 			currDark = get_node("Dark6")
-	currDark.modulate.a-=0.4
+	if currDark:
+		currDark.modulate.a-=0.4
 	fadeTimer.start()
 
 

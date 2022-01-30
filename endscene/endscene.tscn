@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/level-complete.ogg" type="AudioStream" id=1]
 [ext_resource path="res://endscene/music-ending-credits.ogg" type="AudioStream" id=2]
@@ -8,9 +8,11 @@
 [ext_resource path="res://enemy/monster-dealert.ogg" type="AudioStream" id=6]
 [ext_resource path="res://pressure_plate/release.ogg" type="AudioStream" id=7]
 [ext_resource path="res://endscene/endscene.gd" type="Script" id=8]
+[ext_resource path="res://main_menu/main_menu.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 8 )
+main_menu = ExtResource( 9 )
 switch_unpress = ExtResource( 7 )
 monster_dealert = ExtResource( 6 )
 monster_alert = ExtResource( 4 )

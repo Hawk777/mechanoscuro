@@ -11,5 +11,5 @@ dest_files=[ "res://.import/music-ending-credits.ogg-b9775fc9c6fd58fbd4e6930004f
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

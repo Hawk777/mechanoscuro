@@ -11,5 +11,5 @@ dest_files=[ "res://.import/level-complete.ogg-02542813bfae8e87fa1555a7bd842246.
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
