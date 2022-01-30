@@ -4,32 +4,26 @@
 [ext_resource path="res://explosion.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 64 )
 
@@ -65,6 +59,12 @@ func _ready() -> void:
 	_dead_player.stream=dead_sound
 	_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = self
 
+func is_in_light() -> bool:
+	var tile := _tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position)))
+	return tile.isLit
+	
+func get_coordinates() -> Vector2:
+	return _tile_grid.world_to_map(_tile_grid.to_local(global_position))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _alive:
