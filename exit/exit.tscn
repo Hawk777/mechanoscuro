@@ -39,7 +39,7 @@ func _find_player_ancestor_of(node: Node) -> Player:
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="Sprite" type="Sprite"]
+[node name="Exit" type="Sprite"]
 texture = ExtResource( 1 )
 centered = false
 script = SubResource( 2 )
