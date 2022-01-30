@@ -13,14 +13,15 @@ onready var step_player = get_node("MonsterStepPlayer") as AudioStreamPlayer2D
 onready var player := get_node(player_path) as Node2D
 onready var tile_grid := get_node(tile_grid_path) as TileGrid
 
+const MAX_INT := 9223372036854775807
+const PRINT_DEBUG := false
+
 const SEARCHING := "SEARCHING"
-const ALERTING := "ALERTING"
 const CHASING := "CHASING"
-const FINALIZING_CHASE := "FINALIZING_CHASE"
 
 var _alive := true
 var mode := SEARCHING
-var ppt = null # Vector2 that always saves the player's previous location
+var ppt = null # Vector2 that always saves the player's previous location (unused but pls dont delete i may need it later)
 
 export var preferredAxis="y" # preferred movement axis, for making enemies move how they're supposed to.
 
@@ -87,8 +88,35 @@ func we_have_los_to_player() -> bool:
 	# if we were not lined up along either axis, return false
 	return false
 
-func manhattan_distance(vectorA: Vector2, vectorB: Vector2) -> float:
-	return abs(vectorA.x - vectorB.x) + abs(vectorA.y - vectorB.y)
+class NodePathData:
+	var shortest_path_value: int
+	var shortest_path_predecessors: Array
+	var tile: Tile
+
+	func _init(_tile: Tile, is_origin: bool):
+		tile = _tile
+		if (is_origin):
+			shortest_path_value = 0
+		else:
+			shortest_path_value = MAX_INT
+		shortest_path_predecessors = []
+
+	# returns the value of the current shortest path(s) to this node
+	# returns 0 if this is origin and MAX_INT if no path has been found to this node yet
+	func current_best() -> int:
+		return shortest_path_value
+		
+	func is_origin() -> bool:
+		return shortest_path_value == 0
+
+	func consider_path(value: int, predecessor: NodePathData) -> void:
+		if value < shortest_path_value:
+			# if this path beats our current path(s), replace the list entirely
+			shortest_path_value = value
+			shortest_path_predecessors = [ predecessor ]
+		elif value == shortest_path_value:
+			# if this path is just tied with current path(s) we already know of, just add to the list
+			shortest_path_predecessors.push_back(predecessor)
 
 func find_best_path_to_player():
 	var player_location = player.get_coordinates()
@@ -97,25 +125,14 @@ func find_best_path_to_player():
 	var player_tile = tile_grid.get_tilev(player_location)
 	var our_tile = tile_grid.get_tilev(our_location)
 	
-	# always follow into the player's last inhabited tile if it is adjacent to us
-	if ppt != null && ppt.passable && ppt.occupant == null:
-		if ppt.xPos == our_tile.xPos:
-			if ppt.yPos == our_tile.yPos + 1 || ppt.yPos == our_tile.yPos - 1:
-				return ppt
-		if ppt.yPos == our_tile.yPos:
-			if ppt.xPos == our_tile.xPos + 1 || ppt.xPos == our_tile.xPos - 1:
-				return ppt
-	
-	var unvisited_nodes = { our_tile: true, player_tile: true }
-	var shortest_path = {}
-	var previous_nodes = {}
+	var unvisited_nodes = { our_tile: true }
+	var shortest_paths = {}
 	
 	for tile in tile_grid.Grid:
-		if tile.passable && (tile.occupant == null):
+		if tile != our_tile && tile.passable:
 			unvisited_nodes[tile] = true
-			shortest_path[tile] = INF
-	shortest_path[our_tile] = 0
-	shortest_path[player_tile] = INF # remember player tile has an occupant, but we must treat it as traversable
+			shortest_paths[tile] = NodePathData.new(tile, false)
+	shortest_paths[our_tile] = NodePathData.new(our_tile, true)
 	
 	while !unvisited_nodes.empty():
 		var current_min_node = null
@@ -123,7 +140,7 @@ func find_best_path_to_player():
 		for tile in unvisited_nodes.keys():
 			if (current_min_node == null):
 				current_min_node = tile
-			elif shortest_path[tile] < shortest_path[current_min_node]:
+			elif shortest_paths[tile].current_best() < shortest_paths[current_min_node].current_best():
 				current_min_node = tile
 			
 		var neighbouring_tiles = [
@@ -134,21 +151,44 @@ func find_best_path_to_player():
 		]
 		
 		for nt in neighbouring_tiles:
-			if nt != null && shortest_path.has(nt): # (all traversable tiles are in shortest path)
-				var tentative_value = shortest_path[current_min_node] + 1
-				if (tentative_value < shortest_path[nt]):
-					shortest_path[nt] = tentative_value
-					previous_nodes[nt] = current_min_node
+			if nt != null && shortest_paths.has(nt): # (all traversable tiles are in shortest_paths)
+				var tentative_value = shortest_paths[current_min_node].current_best() + 1
+				shortest_paths[nt].consider_path(tentative_value, shortest_paths[current_min_node])
 		
 		unvisited_nodes.erase(current_min_node)
 		
-	if previous_nodes.has(player_tile):
-		var curr = player_tile
-		while previous_nodes[curr] != our_tile:
-			curr = previous_nodes[curr]
-		print("we are on " + str(our_tile.xPos) + "," + str(our_tile.yPos))
-		print("best path to target is to move to " + str(curr.xPos) + "," + str(curr.yPos))
-		return curr
+	if shortest_paths[player_tile].current_best() < MAX_INT:
+		var valid_initial_moves = {}
+		
+		var paths_considered = [ shortest_paths[player_tile] ]
+		while !paths_considered.empty():
+			var this_node_path_data = paths_considered.pop_back()
+			for predecessor_node_path_data in this_node_path_data.shortest_path_predecessors:
+				paths_considered.push_back(predecessor_node_path_data)
+				if (predecessor_node_path_data.is_origin()):
+					valid_initial_moves[this_node_path_data.tile] = this_node_path_data
+				
+		if PRINT_DEBUG:
+			print("we are on " + str(our_tile.xPos) + "," + str(our_tile.yPos))
+			
+		for valid_initial_move in valid_initial_moves.values():
+			var tile = valid_initial_move.tile
+			
+			if PRINT_DEBUG:
+				print("a best path to target is to move to " + str(tile.xPos) + "," + str(tile.yPos))
+
+		# we will need to analyze the possible moves we can start with vs our axis preference
+		var moves = valid_initial_moves.values()
+		
+		# if pref axis is x, find a move that keeps y constant, and vice versa if pref axis is y
+		for move in moves:
+			if move.tile.yPos == our_location.y && preferredAxis == "x":
+				return move.tile
+			if move.tile.xPos == our_location.x && preferredAxis == "y":	
+				return move.tile
+		
+		# otherwise just return one of the moves
+		return moves[0].tile
 	else:
 		return null
 	
@@ -157,56 +197,46 @@ func _on_Player_moved():
 	if !_alive:
 		return
 	
-	var chase_player := false
+	var move_towards_player := false
 	
-	# when in  idle mode, check if the player is seen and move to alerting mode if so
+	# when in  idle mode, check if the player is seen and move to chasing  mode if so
 	if mode == SEARCHING:
 		var player_found = player.is_in_light() && we_have_los_to_player()
 		if player_found:
 			alert_player.play()
 			play("alert")
-			mode = ALERTING
-	
-	# alerting mode is just used to delay the chase by 1 turn, when in alerting mode always move to chasing mode
-	# unless the player is already in the shadows (in which case move to finalizing chase)
-	elif mode == ALERTING:
-		if player.is_in_light():
 			mode = CHASING
-		else:
-			mode = FINALIZING_CHASE
 	
 	# when in chasing mode, move along best available path to player unless they are in the shadows 
 	# (in which case move to finalizing chase)
 	elif mode == CHASING:
-		chase_player = true
+		move_towards_player = true
 		if !player.is_in_light():
-			mode = FINALIZING_CHASE
-
-	# finalizing_chase mode is just used to make the enemy move towards the player one last time before 
-	elif mode == FINALIZING_CHASE:
-		chase_player = true
-		mode = SEARCHING
-		dealert_player.play()
-		play("idle")
+			dealert_player.play()
+			play("idle")
+			mode = SEARCHING
 		
 	# move towards the player by 1 tile according to best path available
-	if chase_player:
+	if move_towards_player:
 		var move_to_tile = find_best_path_to_player()
-		if move_to_tile != null:
+		if move_to_tile != null && (move_to_tile.occupant == null || move_to_tile.occupant == player):
 			var old_tile = get_occupied_tile()
 			old_tile.occupant = null
 			if move_to_tile.occupant != null:
 				move_to_tile.occupant.kill()
 			move_to_tile.occupant = self
-			
+
 			var old_position = global_position
-			print(old_position)
-			print("x: " + str(move_to_tile.xPos) + " y: " + str(move_to_tile.yPos))
+			
+			if PRINT_DEBUG:
+				print(old_position)
+				print("x: " + str(move_to_tile.xPos) + " y: " + str(move_to_tile.yPos))
+				
 			global_position = Vector2(
 				old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
 				old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
 			)
-				
+
 		else:
 			# it is possible for enemies to be stuck. if they become stuck, they will execute this code
 			pass
