@@ -21,5 +21,5 @@ func _on_Player_moved():
 					flip_h=true
 				else:
 					flip_h=false
-		new_pos = self.position + directionFacing*Constants.TILE_SIZE
+			new_pos = self.position + directionFacing*Constants.TILE_SIZE
 		self.position=new_pos
