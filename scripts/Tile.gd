@@ -7,3 +7,4 @@ var xPos: int
 var yPos: int
 var passable := true
 var occupant: Node = null
+var remembered := false
