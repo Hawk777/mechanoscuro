@@ -6,7 +6,6 @@ extends TileMap
 var max_x := 0
 var max_y := 0
 var Grid := []
-var tileprefab;
 
 func coord2idx(x: int, y: int) -> int:
 	return x + (y * max_x)
@@ -36,12 +35,11 @@ func _ready() -> void:
 	
 	# instantiate array of correct size
 	Grid.resize(coord2idx(max_x, max_y) + 1)
-	
-	tileprefab = preload("res://Tile.tscn")
+
 	for cell in used_cells:
 		var x := cell[0] as int
 		var y := cell[1] as int
-		var t := tileprefab.instance() as Tile
+		var t := Tile.new()
 		
 		var tile_set_tile_idx := get_cell(x, y)
 		var shape_count := tile_set.tile_get_shape_count(tile_set_tile_idx)
