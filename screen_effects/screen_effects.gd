@@ -1,38 +1,5 @@
-[gd_scene load_steps=4 format=2]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-render_mode unshaded;
-
-uniform vec2 screen_scale;
-uniform vec2 screen_offset;
-uniform float blurred_mipmap_lod;
-
-void fragment() {
-	ivec2 max_point = textureSize(TEXTURE, 0) - ivec2(1, 1);
-	ivec2 pos = ivec2(floor(vec2(SCREEN_UV.x, 1.0 - SCREEN_UV.y) * screen_scale + screen_offset));
-	ivec2 clamped = clamp(pos, ivec2(0, 0), max_point);
-	float texel = texelFetch(TEXTURE, clamped, 0).r;
-	if(texel < 0.3) {
-		// The tile is unknown and should be black.
-		COLOR = vec4(0.0, 0.0, 0.0, 1.0);
-	} else if(texel < 0.6) {
-		// The tile is remembered but not visible and should be blurred.
-		COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blurred_mipmap_lod);
-	} else {
-		// The tile is currently visible.
-		COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/screen_scale = null
-shader_param/screen_offset = null
-shader_param/blurred_mipmap_lod = null
-
-[sub_resource type="GDScript" id=4]
-script/source = "extends Sprite
+class_name ScreenEffects
+extends Sprite
 
 # The possible values of a pixel in this node’s texture.
 # The pixel values are used to communicate to the shader, not for actual display.
@@ -51,7 +18,7 @@ export(float) var blurred_mipmap_lod := 1.0
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 onready var _player := get_node(player_path) as Player
-onready var _camera := _player.get_node(\"Camera2D\") as Camera2D
+onready var _camera := _player.get_node("Camera2D") as Camera2D
 
 # The image used to communicate bulk data to the shader.
 #
@@ -64,7 +31,7 @@ var _dirty := true
 
 func _ready() -> void:
 	# Update static shader parameters.
-	material.set_shader_param(\"blurred_mipmap_lod\", blurred_mipmap_lod)
+	material.set_shader_param("blurred_mipmap_lod", blurred_mipmap_lod)
 
 	# Create the image that stores the fog data and fill it with all BLACK.
 	var dimensions := _tile_grid.get_used_rect().size
@@ -76,10 +43,10 @@ func _ready() -> void:
 	(texture as ImageTexture).create(_image.get_width(), _image.get_height(), _image.get_format(), 0)
 
 	# Ask to be pinged whenever lighting changes and whenever the player or an enemy moves.
-	_tile_grid.connect(\"lighting_changed\", self, \"refresh\")
-	_player.connect(\"moved\", self, \"refresh\")
-	for enemy in get_tree().get_nodes_in_group(\"enemies\"):
-		enemy.connect(\"moved\", self, \"refresh\")
+	_tile_grid.connect("lighting_changed", self, "refresh")
+	_player.connect("moved", self, "refresh")
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.connect("moved", self, "refresh")
 
 
 func _process(_delta: float) -> void:
@@ -102,8 +69,8 @@ func _process(_delta: float) -> void:
 	# floor((UV × screen_size + TLC - tilemap.origin) ÷ TILE_SIZE)
 	# = floor(UV × screen_size ÷ TILE_SIZE + TLC ÷ TILE_SIZE - tilemap.origin ÷ TILE_SIZE)
 	# = floor(UV × (screen_size ÷ TILE_SIZE) + ((TLC - tilemap.origin) ÷ TILE_SIZE))
-	material.set_shader_param(\"screen_scale\", _screen_size / Constants.TILE_SIZE)
-	material.set_shader_param(\"screen_offset\", (_top_left_corner - _tile_grid.transform.get_origin()) / Constants.TILE_SIZE)
+	material.set_shader_param("screen_scale", _screen_size / Constants.TILE_SIZE)
+	material.set_shader_param("screen_offset", (_top_left_corner - _tile_grid.transform.get_origin()) / Constants.TILE_SIZE)
 
 	# Refresh the fog if needed.
 	_refresh()
@@ -155,11 +122,3 @@ func _refresh() -> void:
 
 		# Clear the dirty flag.
 		_dirty = false
-"
-
-[node name="FogOfWar" type="Sprite"]
-material = SubResource( 3 )
-scale = Vector2( 1024, 640 )
-centered = false
-script = SubResource( 4 )
-blurred_mipmap_lod = 2.0
