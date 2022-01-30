@@ -75,6 +75,3 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
-[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
