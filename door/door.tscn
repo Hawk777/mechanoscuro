@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://door/door.png" type="Texture" id=1]
+[ext_resource path="res://door/door.ogg" type="AudioStream" id=2]
 
 [sub_resource type="GDScript" id=8]
 script/source = "extends Node2D
@@ -25,6 +26,7 @@ func open() -> void:
 		is_open = true
 		_update_tile_passability()
 		$AnimatedSprite.play(\"open\")
+		$OpenClose.play()
 
 
 func close() -> void:
@@ -32,6 +34,7 @@ func close() -> void:
 		is_open = false
 		_update_tile_passability()
 		$AnimatedSprite.play(\"close\")
+		$OpenClose.play()
 
 
 func toggle() -> void:
@@ -93,3 +96,7 @@ script = SubResource( 8 )
 position = Vector2( 32, 32 )
 frames = SubResource( 15 )
 animation = "open"
+
+[node name="OpenClose" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+bus = "SFX"
