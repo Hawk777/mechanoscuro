@@ -68,20 +68,20 @@ func _on_Player_moved():
 		#turn off the lights around this, then turn them back on after movement
 		delight()
 		var finished=false
-		var new_pos = self.position + directionFacing*Constants.TILE_SIZE
+		var nextDirection = Vector2(-directionFacing.y,directionFacing.x)
+		var new_pos = self.position + nextDirection*Constants.TILE_SIZE
 		while !finished:
 			if (tile_grid.coord_is_passable(new_pos[0] / 64, new_pos[1] / 64)):
 				finished=true
 			else:
-				directionFacing=Vector2(directionFacing.y,-directionFacing.x) # if my math is right, this will rotate it 90 degrees
-				if directionFacing.x+directionFacing.y<0:
-					flip_h=true
-				else:
-					flip_h=false
-			new_pos = self.position + directionFacing*Constants.TILE_SIZE
-		_move_by(directionFacing*Constants.TILE_SIZE)
+				nextDirection=Vector2(nextDirection.y,-nextDirection.x) # if my math is right, this will rotate it 90 degrees
+				new_pos = self.position + nextDirection*Constants.TILE_SIZE
+		_move_by(nextDirection*Constants.TILE_SIZE)
 		emit_signal("enemy_moved")
+		directionFacing=nextDirection
+		if directionFacing.x+directionFacing.y<0:
+			flip_h=true
+		else:
+			flip_h=false
 		if _alive:
-			#this is leading to funky stuff when one lampenemy de-lights stuff lit by another one.
-			#Possibly add a bool multiLit if it's lit twice?
 			light()
