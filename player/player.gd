@@ -48,14 +48,14 @@ func _unhandled_input(event: InputEvent) -> void:
 					new_tile.occupant = self
 					emit_signal("moved")
 				else:
-					kill()
+					kill(false)
 
 
 func freeze() -> void:
 	_frozen = true
 
 
-func kill() -> void:
+func kill(_killed_by_door: bool) -> void:
 	if _alive:
 		_alive = false
 		_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = null

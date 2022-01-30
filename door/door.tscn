@@ -49,7 +49,7 @@ func _update_tile_passability() -> void:
 	tile.passable = is_open
 	if not is_open:
 		if tile.occupant != null:
-			tile.occupant.kill()
+			tile.occupant.kill(true)
 "
 
 [sub_resource type="AtlasTexture" id=9]

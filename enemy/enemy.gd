@@ -223,7 +223,7 @@ func _on_Player_moved():
 			var old_tile = get_occupied_tile()
 			old_tile.occupant = null
 			if move_to_tile.occupant != null:
-				move_to_tile.occupant.kill()
+				move_to_tile.occupant.kill(false)
 			move_to_tile.occupant = self
 
 			var old_position = global_position
@@ -243,7 +243,7 @@ func _on_Player_moved():
 	
 	ppt = tile_grid.get_tilev(player.get_coordinates())
 
-func kill():
+func kill(_killed_by_door: bool):
 	if _alive:
 		_alive = false
 		get_occupied_tile().occupant = null
