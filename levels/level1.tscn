@@ -21,6 +21,7 @@ tile_grid_path = NodePath("../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 384, 320 )
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
