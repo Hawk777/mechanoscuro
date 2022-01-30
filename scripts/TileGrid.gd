@@ -65,13 +65,11 @@ func toggle_light() -> void:
 			var coord := idx2coord(i)
 			var cell := self.get_cellv(coord)
 			var name := self.tile_set.tile_get_name(cell)
-			print_debug("Light toggles at index %d, coordinates %s, initial tile %s" % [i, coord, name])
 			if name.ends_with("_dark") or name.ends_with("_light"):
 				name = name.trim_suffix("_dark").trim_suffix("_light")
 				if tile.isLit:
 					name += "_light"
 				else:
 					name += "_dark"
-				print_debug("change name to ", name)
 				cell = self.tile_set.find_tile_by_name(name)
 				self.set_cellv(coord, cell)
