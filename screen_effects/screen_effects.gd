@@ -1,3 +1,4 @@
+class_name ScreenEffects
 extends Sprite
 
 # The possible values of a pixel in this node’s texture.
