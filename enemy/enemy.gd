@@ -20,8 +20,10 @@ var preferredAxis="y" # preferred movement axis, for making enemies move how the
 
 
 func _ready() -> void:
-	alert_player.stream=alert_sound
-	dealert_player.stream=dealert_sound
+	if alert_player:
+		alert_player.stream=alert_sound
+	if dealert_player:
+		dealert_player.stream=dealert_sound
 	step_player.stream=step_sound
 	tilemap.get_tilev(tilemap.world_to_map(tilemap.to_local(global_position))).occupant = self
 

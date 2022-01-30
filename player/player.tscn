@@ -19,14 +19,17 @@ atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=7]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=8]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=9]
+flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 64 )
 
@@ -51,13 +54,15 @@ signal death_started()
 signal death_finished()
 
 export(NodePath) var tile_grid_path: NodePath
+export(AudioStream) var dead_sound
 
 var _alive := true
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
-
+onready var _dead_player = get_node(\"DeadPlayer\") as AudioStreamPlayer
 
 func _ready() -> void:
+	_dead_player.stream=dead_sound
 	_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = self
 
 
@@ -92,6 +97,7 @@ func kill() -> void:
 		_alive = false
 		_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = null
 		emit_signal(\"death_started\")
+		_dead_player.play()
 		self.play(\"explode\")
 		yield(self, \"animation_finished\")
 		self.visible = false
@@ -108,7 +114,6 @@ data = PoolByteArray( 79, 103, 103, 83, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 115, 113, 
 position = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 2
 playing = true
 centered = false
 script = SubResource( 10 )
