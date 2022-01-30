@@ -8,22 +8,22 @@ var max_y := 0
 var Grid := []
 var tileprefab;
 
-func coord2idx(x, y):
+func coord2idx(x: int, y: int) -> int:
 	return x + (y * max_x)
 	
 func idx2coord(idx: int) -> Vector2:
 	return Vector2(idx % max_x, idx / max_x)
 	
-func get_tile(x, y):
+func get_tile(x: int, y: int) -> Tile:
 	return Grid[coord2idx(x, y)]
 
-func coord_is_passable(x, y):
+func coord_is_passable(x: int, y: int) -> bool:
 	var tile := Grid[coord2idx(x, y)] as Tile
 	# print("x: " + str(x) + " y: " + str(y) + " wall: " + str(tile.wall_tile) + " passable: " + str(tile.passable))
 	return !tile.wall_tile && tile.passable
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	var used_cells := self.get_used_cells()
 	
 	# determine dimensions of the grid
