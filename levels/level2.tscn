@@ -36,13 +36,11 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 320, 64 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 192, 512 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
