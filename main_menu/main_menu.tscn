@@ -134,10 +134,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -380.5
+margin_left = -370.0
 margin_top = -176.0
-margin_right = 380.5
-margin_bottom = 159.0
+margin_right = 370.0
+margin_bottom = 199.0
 custom_fonts/font = ExtResource( 5 )
 text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:
 
