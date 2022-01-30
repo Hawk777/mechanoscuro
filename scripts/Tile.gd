@@ -6,13 +6,12 @@ extends Node
 # var b = "text"
 class_name Tile
 
-var isLit = false;
+var isLit := false
 var light_toggles := false
-var xPos;
-var yPos;
-var isOccupied=false;
-var wall_tile=false;
-var passable=true;
+var xPos: int
+var yPos: int
+var isOccupied := false
+var passable := true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
