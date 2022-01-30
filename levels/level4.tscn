@@ -20,7 +20,6 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 2, 2, 0, 3, 3, 0, 2, 4, 0, 2, 5, 0, 3, 
 script = ExtResource( 9 )
 
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
-visible = false
 tile_data = PoolIntArray( 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131078, 0, 0, 131080, 0, 0, 196614, 0, 0, 196616, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458766, 0, 0, 524295, 0, 0, 524299, 0, 0, 524302, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
 
@@ -28,6 +27,7 @@ tile_grid_path = NodePath("../TileMap")
 
 [node name="Door1" parent="Doors" instance=ExtResource( 6 )]
 position = Vector2( 384, 576 )
+rotation = -0.00157919
 tile_grid = NodePath("../../TileMap")
 
 [node name="Door2" parent="Doors" instance=ExtResource( 6 )]
@@ -52,19 +52,19 @@ tile_grid = NodePath("../../TileMap")
 [node name="PressurePlate1" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 320, 576 )
 
-[node name="PressurePlate2" parent="Plates" instance=ExtResource( 8 )]
+[node name="PressurePlate3" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 512, 576 )
 
-[node name="PressurePlate3" parent="Plates" instance=ExtResource( 8 )]
+[node name="PressurePlate4" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 704, 576 )
 
-[node name="PressurePlate4" parent="Plates" instance=ExtResource( 8 )]
+[node name="PressurePlate5" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 896, 576 )
 
-[node name="PressurePlate5" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 768, 64 )
-
 [node name="PressurePlate6" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 704, 64 )
+
+[node name="PressurePlate2" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 384, 64 )
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -89,6 +89,7 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 192 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
@@ -103,14 +104,38 @@ tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate1" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door1" method="toggle"]
-[connection signal="pressed" from="Plates/PressurePlate2" to="TileMap" method="toggle_light"]
-[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door5" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate3" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate3" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate3" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate3" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate3" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate3" to="Doors/Door5" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate4" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate4" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate4" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate4" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate4" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate4" to="Doors/Door5" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate5" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate5" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate5" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate5" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate5" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate5" to="Doors/Door5" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate6" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate6" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate6" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate6" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate6" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate6" to="Doors/Door5" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="TileMap" method="toggle_light"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door1" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door2" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door3" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door4" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate2" to="Doors/Door5" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
