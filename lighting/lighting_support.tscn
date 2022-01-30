@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://lighting/toggleable.tres" type="TileSet" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TileMap
+
+export(NodePath) var tile_grid_path
+
+func _ready() -> void:
+	var _tile_grid := get_node(tile_grid_path) as TileGrid
+	for i in self.get_used_cells():
+		_tile_grid.get_tile(i.x as int, i.y as int).light_toggles = true
+	for i in _tile_grid.get_used_cells():
+		var cell := _tile_grid.get_cellv(i)
+		var name := _tile_grid.tile_set.tile_get_name(cell)
+		if name.ends_with(\"_light\"):
+			_tile_grid.get_tile(i.x as int, i.y as int).isLit = true
+	self.visible = false
+"
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource( 1 )
+format = 1
+script = SubResource( 1 )

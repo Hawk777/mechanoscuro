@@ -7,6 +7,7 @@ extends Node
 class_name Tile
 
 var isLit = false;
+var light_toggles := false
 var xPos;
 var yPos;
 var isOccupied=false;
