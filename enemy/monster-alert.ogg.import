@@ -11,5 +11,5 @@ dest_files=[ "res://.import/monster-alert.ogg-9d55dbf39b466325afb8d8f5af9f412c.o
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
