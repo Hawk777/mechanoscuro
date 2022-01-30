@@ -3,7 +3,7 @@ extends AnimatedSprite
 class_name enemy
 
 onready var player=$Player
-onready var tilemap = $TileMap
+onready var tilemap := $TileMap as TileGrid
 
 var lastKnownCoords # Vector2 for where the player was last seen
 var alert #if it sees the player/the player isn't in darkness, this is true.  Also set the animation to/from alert/idle.
