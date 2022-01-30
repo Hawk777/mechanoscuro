@@ -48,6 +48,7 @@ position = Vector2( 384, 64 )
 [node name="Door1" parent="Doors" instance=ExtResource( 6 )]
 position = Vector2( 384, 576 )
 rotation = -0.00157919
+is_vertical = true
 tile_grid = NodePath("../../TileMap")
 
 [node name="Door2" parent="Doors" instance=ExtResource( 6 )]
@@ -71,26 +72,31 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 256, 256 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 576 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 192 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 192 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 64 )
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]

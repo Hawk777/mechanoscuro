@@ -2,55 +2,21 @@
 
 [ext_resource path="res://door/door.png" type="Texture" id=1]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 64, 64 )
-
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
-"loop": false,
-"name": "close",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "open",
-"speed": 5.0
-} ]
-
 [sub_resource type="GDScript" id=8]
-script/source = "extends AnimatedSprite
+script/source = "extends Node2D
 
 export(bool) var is_open: bool
+export(bool) var is_vertical: bool
 export(NodePath) var tile_grid: NodePath
 
 onready var _tile_grid := get_node(tile_grid) as TileGrid
 onready var _tile_position := _tile_grid.world_to_map(_tile_grid.to_local(self.global_position))
 
 func _ready() -> void:
+	if is_vertical:
+		$AnimatedSprite.rotation = PI/2
 	if is_open:
-		self.animation = \"close\"
+		$AnimatedSprite.animation = \"close\"
 	_update_tile_passability()
 
 
@@ -58,14 +24,14 @@ func open() -> void:
 	if not is_open:
 		is_open = true
 		_update_tile_passability()
-		self.play(\"open\")
+		$AnimatedSprite.play(\"open\")
 
 
 func close() -> void:
 	if is_open:
 		is_open = false
 		_update_tile_passability()
-		self.play(\"close\")
+		$AnimatedSprite.play(\"close\")
 
 
 func toggle() -> void:
@@ -83,8 +49,47 @@ func _update_tile_passability() -> void:
 			tile.occupant.kill()
 "
 
-[node name="AnimatedSprite" type="AnimatedSprite"]
-frames = SubResource( 7 )
-animation = "open"
-centered = false
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": false,
+"name": "close",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
+"loop": false,
+"name": "open",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
 script = SubResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 32, 32 )
+frames = SubResource( 15 )
+animation = "open"
