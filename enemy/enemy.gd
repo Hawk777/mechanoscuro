@@ -72,10 +72,10 @@ func _on_Player_moved():
 
 func _move_by(motion: Vector2) -> void:
 	if motion != Vector2.ZERO:
-		var old_grid := tilemap.world_to_map(tilemap.global_to_local(global_position))
+		var old_grid := tilemap.world_to_map(tilemap.to_local(global_position))
 		var old_tile := tilemap.get_tilev(old_grid)
 		position += motion
-		var new_grid := tilemap.world_to_map(tilemap.global_to_local(global_position))
+		var new_grid := tilemap.world_to_map(tilemap.to_local(global_position))
 		var new_tile := tilemap.get_tilev(new_grid)
 		old_tile.occupant = null
 		if new_tile.occupant != null:
