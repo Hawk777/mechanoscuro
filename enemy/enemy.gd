@@ -55,18 +55,19 @@ func _on_Player_moved():
 		# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
 		# possibly just cheat and check exactly 3 or 4 tiles in each direction?  That should probably work, even if it's not all the way accurate
 			var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
+			var player_tile := tilemap.get_tilev(player_grid)
 			var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
-			if abs(player_grid.x-self_grid.x) < 4 and abs(player_grid.y) < 10 and tilemap.Grid[player_grid.x][player_grid.y].isLit:
+			if abs(player_grid.x-self_grid.x) < 4 and abs(player_grid.y) < 10 and player_tile.isLit:
 				alert=true
 				play("alert")
 				lastKnownCoords=player_grid
 				#lastKnownCoords currently doesn't do anything.
-			if abs(player_grid.y-self_grid.y) < 4 and abs(player_grid.x) < 10 and tilemap.Grid[player_grid.x][player_grid.y].isLit:
+			if abs(player_grid.y-self_grid.y) < 4 and abs(player_grid.x) < 10 and player_tile.isLit:
 				alert=true
 				play("alert")
 				lastKnownCoords=player_grid
 		# check to see if Player is in darkness.  If so, turn off alert and update animation.
-			if !tilemap.Grid[player_grid.x][player_grid.y].isLit:
+			if !player_tile.isLit:
 				alert=false
 				play("idle")
 
