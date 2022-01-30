@@ -1,17 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://restart_support/overlay.png" type="Texture" id=1]
+[ext_resource path="res://fonts/Silver.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
-export(float) var delay_seconds = 1.0
+export(float) var delay_seconds := 1.0
+export(NodePath) var tile_grid_path: NodePath
 
 var _blanking := true
 var _progress := 0.0
 
-onready var _overlay = $Overlay as CanvasItem
+onready var _overlay := $Overlay as CanvasItem
 onready var _progress_bar := $Overlay/ProgressBar as ProgressBar
+onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 
 
 func _process(delta: float) -> void:
@@ -21,6 +24,7 @@ func _process(delta: float) -> void:
 		_overlay.visible = true
 		_progress_bar.value = _progress
 		if _progress >= 1.0:
+			RememberedTiles.remembered_tiles = _tile_grid.get_remembered_tiles()
 			get_tree().reload_current_scene()
 	else:
 		_progress = 0.0
@@ -29,11 +33,15 @@ func _process(delta: float) -> void:
 			_blanking = false
 "
 
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 2 )
+
 [node name="Node2D" type="CanvasLayer"]
 script = SubResource( 1 )
+delay_seconds = 0.5
 
 [node name="Overlay" type="TextureRect" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 1 )
@@ -43,12 +51,26 @@ __meta__ = {
 
 [node name="ProgressBar" type="ProgressBar" parent="Overlay"]
 margin_left = 229.0
-margin_top = 318.0
+margin_top = 296.0
 margin_right = 795.0
-margin_bottom = 371.0
+margin_bottom = 349.0
 max_value = 1.0
 step = 0.0
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReloadingLabel" type="Label" parent="Overlay"]
+margin_left = 230.0
+margin_top = 303.0
+margin_right = 795.0
+margin_bottom = 355.0
+rect_min_size = Vector2( 565, 52 )
+custom_fonts/font = SubResource( 2 )
+text = "Reloading..."
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

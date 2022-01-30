@@ -10,7 +10,7 @@
 [ext_resource path="res://pressure_plate/pressure_plate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 z_as_relative = false
@@ -22,30 +22,6 @@ script = ExtResource( 9 )
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
 tile_data = PoolIntArray( 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131078, 0, 0, 131080, 0, 0, 196614, 0, 0, 196616, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458766, 0, 0, 524295, 0, 0, 524299, 0, 0, 524302, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
-
-[node name="Doors" type="Node2D" parent="."]
-
-[node name="Door1" parent="Doors" instance=ExtResource( 6 )]
-position = Vector2( 384, 576 )
-rotation = -0.00157919
-tile_grid = NodePath("../../TileMap")
-
-[node name="Door2" parent="Doors" instance=ExtResource( 6 )]
-position = Vector2( 896, 448 )
-tile_grid = NodePath("../../TileMap")
-
-[node name="Door3" parent="Doors" instance=ExtResource( 6 )]
-position = Vector2( 640, 128 )
-tile_grid = NodePath("../../TileMap")
-
-[node name="Door4" parent="Doors" instance=ExtResource( 6 )]
-position = Vector2( 512, 128 )
-is_open = true
-tile_grid = NodePath("../../TileMap")
-
-[node name="Door5" parent="Doors" instance=ExtResource( 6 )]
-position = Vector2( 384, 128 )
-tile_grid = NodePath("../../TileMap")
 
 [node name="Plates" type="Node2D" parent="."]
 
@@ -67,38 +43,70 @@ position = Vector2( 704, 64 )
 [node name="PressurePlate2" parent="Plates" instance=ExtResource( 8 )]
 position = Vector2( 384, 64 )
 
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Door1" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 384, 576 )
+rotation = -0.00157919
+is_vertical = true
+tile_grid = NodePath("../../TileMap")
+
+[node name="Door2" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 896, 448 )
+tile_grid = NodePath("../../TileMap")
+
+[node name="Door3" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 640, 128 )
+tile_grid = NodePath("../../TileMap")
+
+[node name="Door4" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 512, 128 )
+is_open = true
+tile_grid = NodePath("../../TileMap")
+
+[node name="Door5" parent="Doors" instance=ExtResource( 6 )]
+position = Vector2( 384, 128 )
+tile_grid = NodePath("../../TileMap")
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 256, 256 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 576 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 192 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 192 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 64 )
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
 
 [node name="RestartSupport" parent="." instance=ExtResource( 4 )]
+tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate1" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door1" method="toggle"]

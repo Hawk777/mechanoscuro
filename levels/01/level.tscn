@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://door/door.tscn" type="PackedScene" id=2]
@@ -9,8 +9,9 @@
 [ext_resource path="res://lighting/lighting_support.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player/fog_of_war.tscn" type="PackedScene" id=10]
 
-[node name="Node2D2" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 z_as_relative = false
@@ -44,17 +45,23 @@ position = Vector2( 448, 256 )
 
 [node name="Enemy" parent="." instance=ExtResource( 9 )]
 position = Vector2( 640, 320 )
+frame = 2
 player_path = NodePath("../Player")
 tile_grid_path = NodePath("../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
-frame = 2
+
 tile_grid_path = NodePath("../TileMap")
+
+[node name="FogOfWar" parent="." instance=ExtResource( 10 )]
+tile_grid_path = NodePath("../TileMap")
+player_path = NodePath("../Player")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
 
 [node name="RestartSupport" parent="." instance=ExtResource( 5 )]
+tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]

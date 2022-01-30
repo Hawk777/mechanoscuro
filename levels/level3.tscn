@@ -23,45 +23,47 @@ script = ExtResource( 9 )
 tile_data = PoolIntArray( 262153, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 393225, 0, 0, 393227, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 524297, 0, 0, 524299, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
 
+[node name="Plates" type="Node2D" parent="."]
+
+[node name="PressurePlate" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 448, 576 )
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Door" parent="Doors" instance=ExtResource( 6 )]
 position = Vector2( 576, 256 )
 tile_grid = NodePath("../../TileMap")
 
-[node name="Plates" type="Node2D" parent="."]
-
-[node name="PressurePlate" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 448, 576 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 128 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 320, 448 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 896, 256 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 64 )
-frame = 0
+frame = 2
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
 
 [node name="RestartSupport" parent="." instance=ExtResource( 4 )]
+tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
-[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
-[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]

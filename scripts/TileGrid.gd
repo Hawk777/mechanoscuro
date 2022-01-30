@@ -1,17 +1,17 @@
 class_name TileGrid
 extends TileMap
 
-# var tile_set := self.tile_set as TileSet
+signal lighting_changed()
 
 var max_x := 0
 var max_y := 0
 var Grid := []
 
 func coord2idx(x: int, y: int) -> int:
-	return x + (y * max_x)
+	return x + (y * (max_x + 1))
 	
 func idx2coord(idx: int) -> Vector2:
-	return Vector2(idx % max_x, idx / max_x)
+	return Vector2(idx % (max_x + 1), idx / (max_x + 1))
 	
 func get_tile(x: int, y: int) -> Tile:
 	return Grid[coord2idx(x, y)]
@@ -53,8 +53,12 @@ func _ready() -> void:
 		
 		add_child(t)
 		Grid[coord2idx(x, y)] = t
-		
-	pass
+
+	# Restore the old set of remembered tiles, if there are any.
+	for i in RememberedTiles.remembered_tiles:
+		var coord := i as Vector2
+		get_tilev(coord).remembered = true
+	RememberedTiles.remembered_tiles.clear()
 
 
 func toggle_light() -> void:
@@ -73,3 +77,13 @@ func toggle_light() -> void:
 					name += "_dark"
 				cell = self.tile_set.find_tile_by_name(name)
 				self.set_cellv(coord, cell)
+	emit_signal("lighting_changed")
+
+
+func get_remembered_tiles() -> Array:
+	var ret := []
+	for i in Grid:
+		var tile := i as Tile
+		if tile.remembered:
+			ret.append(Vector2(tile.xPos, tile.yPos))
+	return ret

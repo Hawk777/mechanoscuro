@@ -24,8 +24,10 @@ var ppt = null # Vector2 that always saves the player's previous location
 var lastKnownCoords = null # Vector2 for where the player was last seen
 
 func _ready() -> void:
-	alert_player.stream=alert_sound
-	dealert_player.stream=dealert_sound
+	if alert_player:
+		alert_player.stream=alert_sound
+	if dealert_player:
+		dealert_player.stream=dealert_sound
 	step_player.stream=step_sound
 	tile_grid.get_tilev(tile_grid.world_to_map(tile_grid.to_local(global_position))).occupant = self
 	
