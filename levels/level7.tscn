@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://pressure_plate/pressure_plate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
 [ext_resource path="res://enemy/lampenemy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screen_effects/screen_effects.tscn" type="PackedScene" id=11]
 
 [node name="Node2D2" type="Node2D"]
 
@@ -149,6 +150,7 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 768, 384 )
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
@@ -157,6 +159,10 @@ directionFacing = Vector2( 0, -1 )
 position = Vector2( 64, 384 )
 frame = 2
 tile_grid_path = NodePath("../TileMap")
+
+[node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
+tile_grid_path = NodePath("../TileMap")
+player_path = NodePath("../Player")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
 
