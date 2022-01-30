@@ -179,14 +179,14 @@ func _on_Player_moved():
 	elif mode == CHASING:
 		chase_player = true
 		if !player.is_in_light():
-			dealert_player.play()
-			play("idle")
 			mode = FINALIZING_CHASE
 
 	# finalizing_chase mode is just used to make the enemy move towards the player one last time before 
 	elif mode == FINALIZING_CHASE:
 		chase_player = true
 		mode = SEARCHING
+		dealert_player.play()
+		play("idle")
 		
 	# move towards the player by 1 tile according to best path available
 	if chase_player:
