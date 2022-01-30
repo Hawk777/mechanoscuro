@@ -21,7 +21,8 @@ const FINALIZING_CHASE := "FINALIZING_CHASE"
 var _alive := true
 var mode := SEARCHING
 var ppt = null # Vector2 that always saves the player's previous location
-var lastKnownCoords = null # Vector2 for where the player was last seen
+
+export var preferredAxis="y" # preferred movement axis, for making enemies move how they're supposed to.
 
 func _ready() -> void:
 	if alert_player:
