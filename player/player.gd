@@ -59,58 +59,70 @@ func _unhandled_input(event: InputEvent) -> void:
 					kill(false)
 
 func run_turn(new_coord, new_tile):
+	print("=============================================")
+	print("building plate lookup...")
+	
 	var plate_lookup = {}
 	for plate in get_tree().get_nodes_in_group("pressure-plates"):
 		plate_lookup[get_object_coordinates(plate)] = plate
 	
-	handle_switch_step(new_coord, new_tile, plate_lookup)
+	print("checking if player stepped on a plate...")
 	
+	if plate_lookup.has(new_coord):
+		print("player has stepped on plate")
+		var plate = plate_lookup[new_coord]
+		print("call on pressed on plate")
+		plate._on_pressed()
+		print("toggle doors and lighting")
+		toggle_doors_and_lighting()
+	
+	print("moving lamp enemies")
 	if move_lamp_enemies(plate_lookup) % 2 != 0:
+		print("toggle doors and lighting")
 		toggle_doors_and_lighting()
+	else: 
+		print("lamp enemy movement does not necessitate door/lighting toggle")
 
+	print("moving regular enemies")
 	if move_reg_enemies(plate_lookup) % 2 != 0:
+		print("toggle doors and lighting")
 		toggle_doors_and_lighting()
+	else:
+		print("regular enemy movement does not necessitate door/lighting toggle")
 	
 func toggle_doors_and_lighting() -> void:
 	_tile_grid.toggle_light_new()
 	for d in get_tree().get_nodes_in_group("doors"):
 		d.toggle_new()
-	
-func handle_switch_step(new_coord, new_tile, plate_lookup) -> void:
-	if plate_lookup.has(new_coord):
-		var plate = plate_lookup[new_coord]
-		plate._on_pressed()
-		toggle_doors_and_lighting()
 
 func move_lamp_enemies(plate_lookup) -> int:
 	var toggles := 0
-	
+
 	for e in get_tree().get_nodes_in_group("lamp-enemies"):
 		var old_coord = get_object_coordinates(e)
 		e.move()
 		var new_coord = get_object_coordinates(e)
 		if new_coord != old_coord:
-			if plate_lookup.has(new_coord) && plate_lookup.has(old_coord):
+			if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
 				toggles = toggles + 1
-		
-	return toggles
 	
+	return toggles
+
 func move_reg_enemies(plate_lookup) -> int:
 	var toggles := 0
-	
+
 	for e in get_tree().get_nodes_in_group("non-lamp-enemies"):
 		var old_coord = get_object_coordinates(e)
 		e.move()
 		var new_coord = get_object_coordinates(e)
 		if new_coord != old_coord:
-			if plate_lookup.has(new_coord) && plate_lookup.has(old_coord):
+			if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
 				toggles = toggles + 1
 	
 	return toggles
 
 func freeze() -> void:
 	_frozen = true
-
 
 func kill(_killed_by_door: bool) -> void:
 	if _alive:
