@@ -23,23 +23,23 @@ export(AudioStream) var press_sound
 export(AudioStream) var release_sound
 
 onready var _sprite = get_node(\"Sprite\") as Sprite
-#onready var _pressed_player = get_node(\"PressedPlayer\") as AudioStreamPlayer
-#onready var _released_player = get_node(\"ReleasedPlayer\") as AudioStreamPlayer
+onready var _pressed_player = get_node(\"PressedPlayer\") as AudioStreamPlayer2D
+onready var _released_player = get_node(\"ReleasedPlayer\") as AudioStreamPlayer2D
 
 func _ready() -> void:
 	_sprite.texture = up_texture
-	#_pressed_player.stream = press_sound
-	#_released_player.stream = release_sound
+	_pressed_player.stream = press_sound
+	_released_player.stream = release_sound
 
 func _on_pressed() -> void:
 	_sprite.texture = down_texture
-	#_pressed_player.play()
+	_pressed_player.play()
 	emit_signal(\"pressed\")
 
 
 func _on_released() -> void:
 	_sprite.texture = up_texture
-	#_released_player.play()
+	_released_player.play()
 	emit_signal(\"released\")
 "
 
