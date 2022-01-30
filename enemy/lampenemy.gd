@@ -62,9 +62,6 @@ func _ready():
 	# light up adjacent spaces
 	light()
 
-func _on_Player_moved():
-	pass
-	
 func move():
 	if directionFacing!=Vector2(0,0):
 		# check that the tile immediately in front of this has no collision box.  If so, advance.  If not, multiply directionFacing by -1 and advance.
