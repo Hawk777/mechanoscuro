@@ -59,21 +59,25 @@ preferredAxis = "x"
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 256, 64 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy2" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 192, 384 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy3" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 64, 384 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy4" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 512, 256 )
+frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
