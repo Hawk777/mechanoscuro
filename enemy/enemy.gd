@@ -16,7 +16,7 @@ onready var tilemap := get_node(tile_grid_path) as TileGrid
 var _alive := true
 var lastKnownCoords # Vector2 for where the player was last seen
 var alert #if it sees the player/the player isn't in darkness, this is true.  Also set the animation to/from alert/idle.
-var preferredAxis="y" # preferred movement axis, for making enemies move how they're supposed to.
+export var preferredAxis="y" # preferred movement axis, for making enemies move how they're supposed to.
 
 
 func _ready() -> void:

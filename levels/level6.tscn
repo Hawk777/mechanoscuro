@@ -105,18 +105,21 @@ position = Vector2( 384, 576 )
 frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 832 )
 frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 640 )
 frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 64 )

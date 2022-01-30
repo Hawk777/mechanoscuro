@@ -41,21 +41,24 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 128 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 576, 128 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 128 )
-frame = 0
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+preferredAxis = "x"
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 256, 64 )
@@ -79,7 +82,7 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 192 )
-frame = 2
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
