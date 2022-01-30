@@ -50,7 +50,7 @@ export(NodePath) var player_path: NodePath
 export(float) var blurred_mipmap_lod := 1.0
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
-onready var _player := get_node(player_path) as Node2D
+onready var _player := get_node(player_path) as Player
 onready var _camera := _player.get_node(\"Camera2D\") as Camera2D
 
 # The image used to communicate bulk data to the shader.
@@ -120,7 +120,7 @@ func _refresh() -> void:
 	if _dirty:
 		# Determine the player’s tile location and view distance.
 		# Rule: if the tile the player is standing on is lit, the view distance is 4; otherwise, 2.
-		var player_grid := _tile_grid.world_to_map(_tile_grid.to_local(_player.global_position))
+		var player_grid := _player.get_coordinates()
 		var player_tile := _tile_grid.get_tilev(player_grid)
 		var view_distance_squared: float
 		if player_tile.isLit:
