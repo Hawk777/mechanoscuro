@@ -16,6 +16,9 @@ func idx2coord(idx: int) -> Vector2:
 func get_tile(x: int, y: int) -> Tile:
 	return Grid[coord2idx(x, y)]
 
+func get_tilev(coord: Vector2) -> Tile:
+	return get_tile(coord.x as int, coord.y as int)
+
 func coord_is_passable(x: int, y: int) -> bool:
 	var tile := Grid[coord2idx(x, y)] as Tile
 	return tile.passable
