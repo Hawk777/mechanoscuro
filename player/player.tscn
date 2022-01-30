@@ -67,7 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			motion = Vector2(Constants.TILE_SIZE, 0)
 		if motion != Vector2.ZERO:
 			var new_pos = self.position + motion
-			if (_tile_grid.coord_is_passable(new_pos[0] / 64, new_pos[1] / 64)):
+			if (_tile_grid.coord_is_passable(new_pos[0] / Constants.TILE_SIZE, new_pos[1] / Constants.TILE_SIZE)):
 				self.position = new_pos
 				emit_signal(\"moved\")
 
