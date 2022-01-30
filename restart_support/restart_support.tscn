@@ -6,12 +6,12 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
-export(float) var delay_seconds = 1.0
+export(float) var delay_seconds := 1.0
 
 var _blanking := true
 var _progress := 0.0
 
-onready var _overlay = $Overlay as CanvasItem
+onready var _overlay := $Overlay as CanvasItem
 onready var _progress_bar := $Overlay/ProgressBar as ProgressBar
 
 
