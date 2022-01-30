@@ -46,8 +46,8 @@ scale = Vector2( 7.6875, 2.95313 )
 texture = ExtResource( 3 )
 
 [node name="Dark4" type="Sprite" parent="."]
-position = Vector2( 118, 498.688 )
-scale = Vector2( 3, 3.99023 )
+position = Vector2( 119, 498.688 )
+scale = Vector2( 3.03125, 3.99023 )
 texture = ExtResource( 3 )
 
 [node name="Dark5" type="Sprite" parent="."]
