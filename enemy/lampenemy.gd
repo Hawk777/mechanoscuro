@@ -15,11 +15,18 @@ func _move_by(motion: Vector2) -> void:
 			position += motion
 			var new_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 			var new_tile := tile_grid.get_tilev(new_grid)
+<<<<<<< Updated upstream
+=======
+			old_tile.occupant = null
+>>>>>>> Stashed changes
 			if new_tile.occupant != null:
 				new_tile.occupant.kill()
 			new_tile.occupant = self
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 func delight():
 	var self_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 	for n in range(-1,2):
@@ -78,4 +85,6 @@ func _on_Player_moved():
 		_move_by(directionFacing*Constants.TILE_SIZE)
 		emit_signal("enemy_moved")
 		if _alive:
+			#this is leading to funky stuff when one lampenemy de-lights stuff lit by another one.
+			#Possibly add a bool multiLit if it's lit twice?
 			light()
