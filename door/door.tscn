@@ -22,6 +22,9 @@ func _ready() -> void:
 
 
 func open() -> void:
+	pass
+	
+func open_new() -> void:
 	if not is_open:
 		is_open = true
 		_update_tile_passability()
@@ -30,6 +33,9 @@ func open() -> void:
 
 
 func close() -> void:
+	pass
+	
+func close_new() -> void:
 	if is_open:
 		is_open = false
 		_update_tile_passability()
@@ -38,10 +44,13 @@ func close() -> void:
 
 
 func toggle() -> void:
+	pass
+	
+func toggle_new() -> void:
 	if is_open:
-		close()
+		close_new()
 	else:
-		open()
+		open_new()
 
 
 func _update_tile_passability() -> void:
@@ -49,7 +58,7 @@ func _update_tile_passability() -> void:
 	tile.passable = is_open
 	if not is_open:
 		if tile.occupant != null:
-			tile.occupant.kill(true)
+			tile.occupant.kill()
 "
 
 [sub_resource type="AtlasTexture" id=9]

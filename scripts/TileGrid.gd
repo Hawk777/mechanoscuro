@@ -46,11 +46,11 @@ func _ready() -> void:
 		
 		var tile_set_tile_idx := get_cell(x, y)
 		var shape_count := tile_set.tile_get_shape_count(tile_set_tile_idx)
-		
+
 		t.xPos = x
 		t.yPos = y
 		t.passable = shape_count == 0
-		
+
 		add_child(t)
 		Grid[coord2idx(x, y)] = t
 
@@ -62,6 +62,9 @@ func _ready() -> void:
 
 
 func toggle_light() -> void:
+	pass
+	
+func toggle_light_new() -> void:
 	for i in range(Grid.size()):
 		var tile := Grid[i] as Tile
 		if tile.light_toggles:

@@ -14,11 +14,6 @@ var _frozen := false
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer2D
 
-onready var doors := get_tree().get_nodes_in_group("doors")
-onready var plates := get_tree().get_nodes_in_group("plates")
-onready var reg_enemies := get_tree().get_nodes_in_group("reg_enemies")
-onready var lamp_enemies := get_tree().get_nodes_in_group("lamp_enemies")
-
 func _ready() -> void:
 	_dead_player.stream=dead_sound
 	_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = self
@@ -29,6 +24,9 @@ func is_in_light() -> bool:
 	
 func get_coordinates() -> Vector2:
 	return _tile_grid.world_to_map(_tile_grid.to_local(global_position))
+
+func get_object_coordinates(obj) -> Vector2:
+	return _tile_grid.world_to_map(_tile_grid.to_local(obj.global_position))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _alive and not _frozen:
@@ -52,24 +50,59 @@ func _unhandled_input(event: InputEvent) -> void:
 				if new_tile.occupant == null:
 					new_tile.occupant = self
 					emit_signal("moved")
-					run_turn()
+					run_turn(new_grid, new_tile)
 				else:
 					kill(false)
 
-func run_turn():
-	handle_switch_step()
-	move_lamp_enemies()
-	move_reg_enemies()
+func run_turn(new_coord, new_tile):
+	var plate_lookup = {}
+	for plate in get_tree().get_nodes_in_group("pressure-plates"):
+		plate_lookup[get_object_coordinates(plate)] = plate
 	
-func handle_switch_step():
-	pass
+	handle_switch_step(new_coord, new_tile, plate_lookup)
 	
-func move_lamp_enemies():
-	for lamp_enemy in lamp_enemies:
-		print(str(lamp_enemy))
+	if move_lamp_enemies(plate_lookup) % 2 != 0:
+		toggle_doors_and_lighting()
+
+	if move_reg_enemies(plate_lookup) % 2 != 0:
+		toggle_doors_and_lighting()
 	
-func move_reg_enemies():
-	pass
+func toggle_doors_and_lighting() -> void:
+	_tile_grid.toggle_light_new()
+	for d in get_tree().get_nodes_in_group("doors"):
+		d.toggle_new()
+	
+func handle_switch_step(new_coord, new_tile, plate_lookup) -> void:
+	if plate_lookup.has(new_coord):
+		var plate = plate_lookup[new_coord]
+		plate._on_pressed()
+		toggle_doors_and_lighting()
+
+func move_lamp_enemies(plate_lookup) -> int:
+	var toggles := 0
+	
+	for e in get_tree().get_nodes_in_group("lamp-enemies"):
+		var old_coord = get_object_coordinates(e)
+		e.move()
+		var new_coord = get_object_coordinates(e)
+		if new_coord != old_coord:
+			if plate_lookup.has(new_coord) && plate_lookup.has(old_coord):
+				toggles = toggles + 1
+		
+	return toggles
+	
+func move_reg_enemies(plate_lookup) -> int:
+	var toggles := 0
+	
+	for e in get_tree().get_nodes_in_group("non-lamp-enemies"):
+		var old_coord = get_object_coordinates(e)
+		e.move()
+		var new_coord = get_object_coordinates(e)
+		if new_coord != old_coord:
+			if plate_lookup.has(new_coord) && plate_lookup.has(old_coord):
+				toggles = toggles + 1
+	
+	return toggles
 
 func freeze() -> void:
 	_frozen = true
