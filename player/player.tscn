@@ -76,6 +76,6 @@ limit_top = -32
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
-[node name="DeadPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DeadPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 11 )
 bus = "SFX"

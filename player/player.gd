@@ -12,7 +12,7 @@ var _alive := true
 var _frozen := false
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
-onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer
+onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer2D
 
 func _ready() -> void:
 	_dead_player.stream=dead_sound
