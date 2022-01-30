@@ -192,8 +192,10 @@ func find_best_path_to_player():
 	else:
 		return null
 	
-# each turn: move, THEN determine if player is in darkness, and if so turn off alert.
 func _on_Player_moved():
+	pass
+	
+func move():
 	if !_alive:
 		return
 	
