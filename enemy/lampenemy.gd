@@ -17,7 +17,7 @@ func _move_by(motion: Vector2) -> void:
 			var new_tile := tile_grid.get_tilev(new_grid)
 			old_tile.occupant = null
 			if new_tile.occupant != null:
-				new_tile.occupant.kill()
+				new_tile.occupant.kill(false)
 			new_tile.occupant = self
 func delight():
 	var self_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))

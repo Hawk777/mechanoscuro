@@ -110,51 +110,51 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 256, 128 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 320, 128 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 448, 768 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 576 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 704 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 896 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 1024 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 768, 384 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
+directionFacing = Vector2( 0, -1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 384 )
-frame = 2
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
@@ -247,3 +247,11 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate7" to="Doors/Door10" method="toggle"]
 [connection signal="pressed" from="Plates/PressurePlate7" to="Doors/Door11" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
+[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy4" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy5" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy6" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy7" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/LampEnemy1" method="_on_Player_moved"]
