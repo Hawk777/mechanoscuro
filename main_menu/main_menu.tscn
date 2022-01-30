@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main_menu/background.png" type="Texture" id=1]
 [ext_resource path="res://main_menu/mute_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://levels/level1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://main_menu/The Led Display St.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://fonts/Silver.tres" type="DynamicFont" id=5]
+[ext_resource path="res://fonts/SilverButton.tres" type="DynamicFont" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -78,32 +80,35 @@ __meta__ = {
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 margin_right = 128.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 128, 32 )
 focus_neighbour_top = NodePath("../CreditButton")
+custom_fonts/font = ExtResource( 6 )
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StoryButton" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 49.0
 margin_right = 128.0
-margin_bottom = 80.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 128, 32 )
+custom_fonts/font = ExtResource( 6 )
 text = "Story"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CreditButton" type="Button" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 98.0
 margin_right = 128.0
-margin_bottom = 128.0
+margin_bottom = 131.0
 rect_min_size = Vector2( 128, 32 )
 focus_neighbour_bottom = NodePath("../PlayButton")
+custom_fonts/font = ExtResource( 6 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -126,10 +131,13 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="StoryPanel"]
-margin_left = 10.0
-margin_top = 11.0
-margin_right = 862.0
-margin_bottom = 253.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -402.5
+margin_top = 24.0
+margin_right = 402.5
+margin_bottom = 273.0
+custom_fonts/font = ExtResource( 5 )
 text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:  Beware the land of life and death.  Beware their chaos and malaise, lest it take you in and show you your end.
 This warning proved to be too enticing, and you could not help but wonder.  Where did life come from, and where did it go?  Why did death persist in following it?  Your peers refuse to entertain such questions, so you must ponder them alone, with only the land to answer.  So you set off, seeking out the entrancing truth of the old places, where life used to be.  Your pilgrimage was fruitful, and brought you deep into blasphemous places.  To commemmorate, you thought to bring a trinket back for study.
 But the land does not take kindly to trespassers nor thieves.  \"A debt!\" the land cried, \"A debt to be paid!  Bring this one into the eternal cycle!\"  At its word, the creatures set upon you, intent on showing you the disparity between life and death.
@@ -152,12 +160,14 @@ margin_left = -64.0
 margin_top = 115.0
 margin_right = 64.0
 margin_bottom = 147.0
+custom_fonts/font = ExtResource( 6 )
 text = "OK"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CreditPanel" type="Panel" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -178,6 +188,7 @@ margin_left = -148.0
 margin_top = 30.0
 margin_right = 148.0
 margin_bottom = 163.0
+custom_fonts/font = ExtResource( 5 )
 text = "Game Design: Zereijin
 
 Programming and UI:
@@ -203,6 +214,7 @@ margin_left = -64.0
 margin_top = 92.5
 margin_right = 64.0
 margin_bottom = 124.5
+custom_fonts/font = ExtResource( 6 )
 text = "OK"
 __meta__ = {
 "_edit_use_anchors_": false
