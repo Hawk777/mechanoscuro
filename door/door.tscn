@@ -76,8 +76,6 @@ func toggle() -> void:
 
 
 func _update_tile_passability() -> void:
-	var x := _tile_position.x
-	var y := _tile_position.y
 	var tile := _tile_grid.get_tile(_tile_position.x as int, _tile_position.y as int) as Tile
 	tile.passable = is_open
 "
