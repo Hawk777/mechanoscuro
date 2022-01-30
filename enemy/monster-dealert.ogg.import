@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/monster-dealert.ogg-9a68612b0d11b2c6f4599ca899c4b0f0.oggstr"
+
+[deps]
+
+source_file="res://enemy/monster-dealert.ogg"
+dest_files=[ "res://.import/monster-dealert.ogg-9a68612b0d11b2c6f4599ca899c4b0f0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

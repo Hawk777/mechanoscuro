@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/monster-alert.ogg-9d55dbf39b466325afb8d8f5af9f412c.oggstr"
+
+[deps]
+
+source_file="res://enemy/monster-alert.ogg"
+dest_files=[ "res://.import/monster-alert.ogg-9d55dbf39b466325afb8d8f5af9f412c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
