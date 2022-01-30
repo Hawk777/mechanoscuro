@@ -5,6 +5,7 @@ class_name enemy
 onready var player=$Player
 onready var tilemap := $TileMap as TileGrid
 
+var _alive := true
 var lastKnownCoords # Vector2 for where the player was last seen
 var alert #if it sees the player/the player isn't in darkness, this is true.  Also set the animation to/from alert/idle.
 var preferredAxis # preferred movement axis, for making enemies move how they're supposed to.
@@ -30,8 +31,8 @@ func checkMoveY():
 # each turn: move, THEN determine if player is in darkness, and if so turn off alert.
 # TODO: this object isn't yet linked to the signal emitted by the Player.  Do that when they're in the scene together.
 func _on_Player_moved():
-	# if alert, make a move
-	if alert:
+	# if alive and alert, make a move
+	if _alive and alert:
 		var motion;
 		#move toward player on preferred axis
 		if preferredAxis=="x":
@@ -59,4 +60,12 @@ func _on_Player_moved():
 		if !tilemap.Grid[playerPos.x][playerPos.y].isLit:
 			alert=false
 			play("idle")
-	
+
+
+func kill():
+	if _alive:
+		_alive = false
+		self.play("explode")
+		yield(self, "animation_finished")
+		self.visible = false
+		self.queue_free()
