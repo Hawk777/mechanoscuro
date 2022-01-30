@@ -153,7 +153,8 @@ func find_best_path_to_player():
 		for nt in neighbouring_tiles:
 			if nt != null && shortest_paths.has(nt): # (all traversable tiles are in shortest_paths)
 				var tentative_value = shortest_paths[current_min_node].current_best() + 1
-				shortest_paths[nt].consider_path(tentative_value, shortest_paths[current_min_node])
+				if tentative_value > 0: # current_best was not MAX_INT so +1 did not wrap.
+					shortest_paths[nt].consider_path(tentative_value, shortest_paths[current_min_node])
 		
 		unvisited_nodes.erase(current_min_node)
 		
