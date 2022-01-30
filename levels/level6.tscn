@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://pressure_plate/pressure_plate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
+[ext_resource path="res://enemy/lampenemy.tscn" type="PackedScene" id=10]
 
 [node name="Node2D2" type="Node2D"]
 
@@ -88,34 +89,37 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 192, 192 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 128, 768 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 384, 576 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 832 )
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 640 )
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 64 )
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
@@ -125,8 +129,12 @@ frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
+[node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
+position = Vector2( 1024, 768 )
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 128, 64 )
+frame = 0
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
