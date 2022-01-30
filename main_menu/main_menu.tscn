@@ -183,14 +183,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TopLabel" type="Label" parent="CreditPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.229
+margin_left = -371.0
+margin_top = 15.0
+margin_right = 372.0
+margin_bottom = -6.502
+custom_fonts/font = ExtResource( 5 )
+text = "- a game made for Global Game Jam 2022 -"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LeftLabel" type="Label" parent="CreditPanel"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.229
 margin_left = -371.0
-margin_top = 20.0
+margin_top = 43.0
 margin_right = -171.0
-margin_bottom = 85.498
+margin_bottom = 108.498
 custom_fonts/font = ExtResource( 5 )
 text = "Game Design:
 Zereijin"
@@ -205,9 +221,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.229
 margin_left = -100.0
-margin_top = 20.0
+margin_top = 43.0
 margin_right = 100.0
-margin_bottom = 85.498
+margin_bottom = 129.498
 custom_fonts/font = ExtResource( 5 )
 text = "
 Programming and UI:
@@ -228,9 +244,9 @@ anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.229
 margin_left = 162.0
-margin_top = 20.0
+margin_top = 43.0
 margin_right = 362.0
-margin_bottom = 85.498
+margin_bottom = 108.498
 custom_fonts/font = ExtResource( 5 )
 text = "Sound, Music & Graphics:
 FydaTECH"
