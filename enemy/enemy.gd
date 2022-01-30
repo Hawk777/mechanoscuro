@@ -193,9 +193,6 @@ func find_best_path_to_player():
 	else:
 		return null
 	
-func _on_Player_moved():
-	pass
-	
 func move():
 	if !_alive:
 		return
