@@ -71,7 +71,7 @@ func toggle_light() -> void:
 			var name := self.tile_set.tile_get_name(cell)
 			if name.ends_with("_dark") or name.ends_with("_light"):
 				name = name.trim_suffix("_dark").trim_suffix("_light")
-				if tile.isLit:
+				if tile.isLit or tile.lamped:
 					name += "_light"
 				else:
 					name += "_dark"

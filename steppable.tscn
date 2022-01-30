@@ -12,7 +12,7 @@ script/source = "extends Node
 signal pressed()
 signal released()
 
-onready var _area_2d := get_node(\"Area2D\") as Area2D
+onready var _area_2d := $Area2D as Area2D
 onready var _is_pressed := false
 
 func _on_enter(_other: Area2D) -> void:
@@ -34,6 +34,7 @@ extents = Vector2( 16, 16 )
 script = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 32, 32 )

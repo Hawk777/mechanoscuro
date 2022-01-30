@@ -9,7 +9,7 @@
 [ext_resource path="res://lighting/lighting_support.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=9]
-[ext_resource path="res://player/fog_of_war.tscn" type="PackedScene" id=10]
+[ext_resource path="res://screen_effects.tscn" type="PackedScene" id=10]
 
 [node name="Node2D" type="Node2D"]
 

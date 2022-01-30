@@ -41,21 +41,18 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 128 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 576, 128 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 128 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 preferredAxis = "x"
@@ -82,7 +79,6 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 192 )
-frame = 2
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
@@ -93,3 +89,10 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate1" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate1" to="Doors/Door1" method="toggle"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
+[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/LampEnemy1" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/LampEnemy2" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/LampEnemy3" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/LampEnemy4" method="_on_Player_moved"]
