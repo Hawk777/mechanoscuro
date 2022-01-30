@@ -57,7 +57,6 @@ tile_grid_path = NodePath("../TileMap")
 [node name="FogOfWar" parent="." instance=ExtResource( 10 )]
 tile_grid_path = NodePath("../TileMap")
 player_path = NodePath("../Player")
-blurred_mipmap_lod = 2.0
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
 
