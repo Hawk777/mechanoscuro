@@ -44,7 +44,7 @@ func _on_released() -> void:
 	emit_signal(\"released\")
 "
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["pressure-plates"]]
 script = SubResource( 1 )
 up_texture = ExtResource( 3 )
 down_texture = ExtResource( 2 )

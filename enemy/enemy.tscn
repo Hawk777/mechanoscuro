@@ -76,7 +76,7 @@ data = PoolByteArray( 79, 103, 103, 83, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 103, 107, 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 31, 30.5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" groups=["enemies"]]
+[node name="AnimatedSprite" type="AnimatedSprite" groups=["enemies", "non-lamp-enemies"]]
 frames = SubResource( 13 )
 animation = "idle"
 frame = 1

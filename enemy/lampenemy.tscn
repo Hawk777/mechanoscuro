@@ -44,7 +44,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 31, 31 )
 
-[node name="AnimatedSprite" type="AnimatedSprite"]
+[node name="AnimatedSprite" type="AnimatedSprite" groups=["enemies", "lamp-enemies"]]
 frames = SubResource( 3 )
 animation = "idle"
 speed_scale = 0.5
