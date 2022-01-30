@@ -24,7 +24,6 @@ func _process(delta: float) -> void:
 		var enemies = get_tree().get_nodes_in_group("enemies")
 		_process_for_level(delta, player, enemies, _last_was_menu)
 		_last_was_menu = false
-	print_debug("menu=%f, slow=%f, fast=%f, panic=%f" % [_menu.volume_db, _slow.volume_db, _fast.volume_db, _panic.volume_db])
 
 
 func _process_for_menu(delta: float, first: bool) -> void:
