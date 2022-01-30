@@ -61,6 +61,7 @@ player_path = NodePath("../Player")
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
 
 [node name="RestartSupport" parent="." instance=ExtResource( 5 )]
+tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]

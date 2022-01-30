@@ -53,8 +53,12 @@ func _ready() -> void:
 		
 		add_child(t)
 		Grid[coord2idx(x, y)] = t
-		
-	pass
+
+	# Restore the old set of remembered tiles, if there are any.
+	for i in RememberedTiles.remembered_tiles:
+		var coord := i as Vector2
+		get_tilev(coord).remembered = true
+	RememberedTiles.remembered_tiles.clear()
 
 
 func toggle_light() -> void:
@@ -74,3 +78,12 @@ func toggle_light() -> void:
 				cell = self.tile_set.find_tile_by_name(name)
 				self.set_cellv(coord, cell)
 	emit_signal("lighting_changed")
+
+
+func get_remembered_tiles() -> Array:
+	var ret := []
+	for i in Grid:
+		var tile := i as Tile
+		if tile.remembered:
+			ret.append(Vector2(tile.xPos, tile.yPos))
+	return ret

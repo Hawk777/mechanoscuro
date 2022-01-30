@@ -7,12 +7,14 @@
 script/source = "extends Node
 
 export(float) var delay_seconds := 1.0
+export(NodePath) var tile_grid_path: NodePath
 
 var _blanking := true
 var _progress := 0.0
 
 onready var _overlay := $Overlay as CanvasItem
 onready var _progress_bar := $Overlay/ProgressBar as ProgressBar
+onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 
 
 func _process(delta: float) -> void:
@@ -22,6 +24,7 @@ func _process(delta: float) -> void:
 		_overlay.visible = true
 		_progress_bar.value = _progress
 		if _progress >= 1.0:
+			RememberedTiles.remembered_tiles = _tile_grid.get_remembered_tiles()
 			get_tree().reload_current_scene()
 	else:
 		_progress = 0.0
