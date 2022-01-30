@@ -54,7 +54,7 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[node name="FogOfWar" type="Sprite"]
+[node name="ScreenEffects" type="Sprite"]
 material = SubResource( 3 )
 scale = Vector2( 1024, 640 )
 centered = false
