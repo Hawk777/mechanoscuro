@@ -65,33 +65,29 @@ preferredAxis = "x"
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 256, 64 )
-frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy2" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 192, 384 )
-frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, 1 )
 
 [node name="LampEnemy3" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 64, 384 )
-frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
 
 [node name="LampEnemy4" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 512, 256 )
-frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 896, 64 )
+position = Vector2( 64, 192 )
 tile_grid_path = NodePath("../TileMap")
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
