@@ -62,7 +62,10 @@ position = Vector2( 32, 32 )
 shape = SubResource( 4 )
 
 [node name="MonsterStepPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
 
 [node name="MonsterAlertPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"
 
 [node name="MonsterDeAlertPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = "SFX"

@@ -175,33 +175,81 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -306.5
-margin_top = -167.5
-margin_right = 306.5
-margin_bottom = 167.5
+margin_left = -384.0
+margin_top = -47.0
+margin_right = 384.0
+margin_bottom = 191.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CreditPanel"]
+[node name="TopLabel" type="Label" parent="CreditPanel"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.229
-margin_left = -148.0
-margin_top = 30.0
-margin_right = 148.0
-margin_bottom = 163.0
+margin_left = -371.0
+margin_top = 15.0
+margin_right = 372.0
+margin_bottom = -6.502
 custom_fonts/font = ExtResource( 5 )
-text = "Game Design: Zereijin
+text = "- a game made for Global Game Jam 2022 -"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
+[node name="LeftLabel" type="Label" parent="CreditPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.229
+margin_left = -371.0
+margin_top = 43.0
+margin_right = -171.0
+margin_bottom = 108.498
+custom_fonts/font = ExtResource( 5 )
+text = "Game Design:
+Zereijin"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleLabel" type="Label" parent="CreditPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.229
+margin_left = -100.0
+margin_top = 43.0
+margin_right = 100.0
+margin_bottom = 129.498
+custom_fonts/font = ExtResource( 5 )
+text = "
 Programming and UI:
 Hawk777
 Derya Aydede
 Alex Gagne
 
-Music and Visual Design: Fyda
 
 Silver font by Poppy Works"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightLabel" type="Label" parent="CreditPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.229
+margin_left = 162.0
+margin_top = 43.0
+margin_right = 362.0
+margin_bottom = 108.498
+custom_fonts/font = ExtResource( 5 )
+text = "Sound, Music & Graphics:
+FydaTECH"
 align = 1
 valign = 1
 __meta__ = {
@@ -214,11 +262,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -64.0
-margin_top = 92.5
+margin_top = 78.5
 margin_right = 64.0
-margin_bottom = 124.5
+margin_bottom = 111.5
 custom_fonts/font = ExtResource( 6 )
-text = "OK"
+text = "Back to menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }

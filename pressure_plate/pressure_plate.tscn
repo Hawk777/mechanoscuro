@@ -57,8 +57,10 @@ release_sound = ExtResource( 4 )
 offset = Vector2( 32, 32 )
 
 [node name="PressedPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
 
 [node name="ReleasedPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"
 
 [connection signal="pressed" from="Steppable" to="." method="_on_pressed"]
 [connection signal="released" from="Steppable" to="." method="_on_released"]
