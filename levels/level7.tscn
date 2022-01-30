@@ -23,6 +23,29 @@ script = ExtResource( 9 )
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
 tile_grid_path = NodePath("../TileMap")
 
+[node name="Plates" type="Node2D" parent="."]
+
+[node name="PressurePlate1" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 896, 256 )
+
+[node name="PressurePlate2" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 512, 1152 )
+
+[node name="PressurePlate3" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 768, 576 )
+
+[node name="PressurePlate4" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 704, 704 )
+
+[node name="PressurePlate5" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 768, 896 )
+
+[node name="PressurePlate6" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 768, 1024 )
+
+[node name="PressurePlate7" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 448, 832 )
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Door1" parent="Doors" instance=ExtResource( 6 )]
@@ -76,76 +99,58 @@ tile_grid = NodePath("../../TileMap")
 position = Vector2( 448, 832 )
 tile_grid = NodePath("../../TileMap")
 
-[node name="Plates" type="Node2D" parent="."]
-
-[node name="PressurePlate1" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 896, 256 )
-
-[node name="PressurePlate2" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 512, 1152 )
-
-[node name="PressurePlate3" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 768, 576 )
-
-[node name="PressurePlate4" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 704, 704 )
-
-[node name="PressurePlate5" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 768, 896 )
-
-[node name="PressurePlate6" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 768, 1024 )
-
-[node name="PressurePlate7" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 448, 832 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 256, 128 )
-frame = 2
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 320, 128 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 448, 768 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 576 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 704 )
-frame = 2
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 896 )
-frame = 2
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 1024 )
-frame = 2
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 768, 384 )
+player_path = NodePath("../../Player")
+tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 384 )
-frame = 2
+frame = 1
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]

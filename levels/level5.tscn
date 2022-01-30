@@ -25,34 +25,34 @@ visible = false
 tile_data = PoolIntArray( 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 131078, 0, 0, 131080, 0, 0, 196614, 0, 0, 196616, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458766, 0, 0, 524295, 0, 0, 524299, 0, 0, 524302, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0 )
 tile_grid_path = NodePath("../TileMap")
 
+[node name="Plates" type="Node2D" parent="."]
+
+[node name="PressurePlate1" parent="Plates" instance=ExtResource( 8 )]
+position = Vector2( 512, 64 )
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Door1" parent="Doors" instance=ExtResource( 6 )]
 position = Vector2( 832, 320 )
 tile_grid = NodePath("../../TileMap")
 
-[node name="Plates" type="Node2D" parent="."]
-
-[node name="PressurePlate1" parent="Plates" instance=ExtResource( 8 )]
-position = Vector2( 512, 64 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 512, 128 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 576, 128 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 128 )
-frame = 0
+frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
@@ -76,6 +76,7 @@ playing = true
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 192 )
+frame = 0
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 7 )]
