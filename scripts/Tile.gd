@@ -10,7 +10,6 @@ var isLit := false
 var light_toggles := false
 var xPos: int
 var yPos: int
-var isOccupied := false
 var passable := true
 
 
