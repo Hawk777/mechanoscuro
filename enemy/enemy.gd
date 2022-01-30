@@ -248,6 +248,8 @@ func kill(_killed_by_door: bool):
 		_alive = false
 		get_occupied_tile().occupant = null
 		self.play("explode")
+		if _killed_by_door:
+			$MonsterDieDoor.play()
 		yield(self, "animation_finished")
 		self.visible = false
 		self.queue_free()

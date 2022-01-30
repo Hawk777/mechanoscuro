@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://enemy/lampenemy-idle.png" type="Texture" id=1]
 [ext_resource path="res://enemy/lampenemy.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://enemy/enemy-step.ogg" type="AudioStream" id=4]
 [ext_resource path="res://enemy/monster-alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://explosion.png" type="Texture" id=6]
+[ext_resource path="res://enemy/door-kill.ogg" type="AudioStream" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -69,3 +70,6 @@ bus = "SFX"
 
 [node name="MonsterDeAlertPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = "SFX"
+
+[node name="MonsterDieDoor" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
