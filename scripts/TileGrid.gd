@@ -1,6 +1,8 @@
 class_name TileGrid
 extends TileMap
 
+signal lighting_changed()
+
 var max_x := 0
 var max_y := 0
 var Grid := []
@@ -71,3 +73,4 @@ func toggle_light() -> void:
 					name += "_dark"
 				cell = self.tile_set.find_tile_by_name(name)
 				self.set_cellv(coord, cell)
+	emit_signal("lighting_changed")
