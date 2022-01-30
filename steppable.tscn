@@ -12,7 +12,7 @@ script/source = "extends Node
 signal pressed()
 signal released()
 
-onready var _area_2d := get_node(\"Area2D\") as Area2D
+onready var _area_2d := $Area2D as Area2D
 onready var _is_pressed := false
 
 func _on_enter(_other: Area2D) -> void:
