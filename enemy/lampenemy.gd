@@ -15,17 +15,19 @@ func _move_by(motion: Vector2) -> void:
 			position += motion
 			var new_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 			var new_tile := tile_grid.get_tilev(new_grid)
+			old_tile.occupant = null
 			if new_tile.occupant != null:
 				new_tile.occupant.kill()
 			new_tile.occupant = self
-
-
 func delight():
 	var self_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 	for n in range(-1,2):
 		for m in range(-1,2):
 			# turn off adjacent lights
-			tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].lamped=false
+			if tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].doubleLamped:
+				tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].doubleLamped=false
+			else:
+				tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].lamped=false
 			var cell := tile_grid.get_cellv(Vector2(self_grid.x+n,self_grid.y+m))
 			var name := tile_grid.tile_set.tile_get_name(cell)
 			if name.ends_with("_dark") or name.ends_with("_light"):
@@ -42,6 +44,8 @@ func light():
 	for n in range(-1,2):
 		for m in range(-1,2):
 			#turn on adjacent lights
+			if tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].lamped:
+				tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].doubleLamped=true
 			tile_grid.Grid[tile_grid.coord2idx(self_grid.x+n,self_grid.y+m)].lamped=true
 			var cell := tile_grid.get_cellv(Vector2(self_grid.x+n,self_grid.y+m))
 			var name := tile_grid.tile_set.tile_get_name(cell)
@@ -78,4 +82,6 @@ func _on_Player_moved():
 		_move_by(directionFacing*Constants.TILE_SIZE)
 		emit_signal("enemy_moved")
 		if _alive:
+			#this is leading to funky stuff when one lampenemy de-lights stuff lit by another one.
+			#Possibly add a bool multiLit if it's lit twice?
 			light()

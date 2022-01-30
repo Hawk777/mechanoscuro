@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://screen_effects/screen_effects.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float blurred_mipmap_lod;
+uniform float brightness;
+uniform vec2 screen_scale;
+uniform vec2 screen_offset;
+
+void fragment() {
+	ivec2 max_point = textureSize(TEXTURE, 0) - ivec2(1, 1);
+	ivec2 pos = ivec2(floor(vec2(SCREEN_UV.x, 1.0 - SCREEN_UV.y) * screen_scale + screen_offset));
+	ivec2 clamped = clamp(pos, ivec2(0, 0), max_point);
+	float texel = texelFetch(TEXTURE, clamped, 0).r;
+	vec4 colour;
+	if(texel < 0.3) {
+		// The tile is unknown and should be black.
+		colour = vec4(0.0, 0.0, 0.0, 1.0);
+	} else if(texel < 0.6) {
+		// The tile is remembered but not visible and should be blurred.
+		colour = textureLod(SCREEN_TEXTURE, SCREEN_UV, blurred_mipmap_lod);
+	} else {
+		// The tile is currently visible.
+		colour = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	}
+	float original_alpha = colour.a;
+	colour *= brightness;
+	COLOR = vec4(colour.r, colour.g, colour.b, original_alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/blurred_mipmap_lod = null
+shader_param/brightness = null
+shader_param/screen_scale = null
+shader_param/screen_offset = null
+
+[node name="FogOfWar" type="Sprite"]
+material = SubResource( 3 )
+scale = Vector2( 1024, 640 )
+centered = false
+script = ExtResource( 1 )
+blurred_mipmap_lod = 2.0
