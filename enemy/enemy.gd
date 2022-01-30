@@ -2,8 +2,11 @@ extends AnimatedSprite
 
 class_name enemy
 
-onready var player=$Player
-onready var tilemap := $TileMap as TileGrid
+export(NodePath) var player_path
+export(NodePath) var tile_grid_path
+
+onready var player := get_node(player_path) as Node2D
+onready var tilemap := get_node(tile_grid_path) as TileGrid
 
 var _alive := true
 var lastKnownCoords # Vector2 for where the player was last seen
