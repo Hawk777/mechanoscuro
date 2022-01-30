@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tiles/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scripts/TileGrid.gd" type="Script" id=9]
 [ext_resource path="res://enemy/lampenemy.tscn" type="PackedScene" id=10]
 [ext_resource path="res://screen_effects/screen_effects.tscn" type="PackedScene" id=11]
+[ext_resource path="res://exit/exit.tscn" type="PackedScene" id=12]
 
 [node name="Node2D2" type="Node2D"]
 
@@ -23,6 +24,10 @@ script = ExtResource( 9 )
 
 [node name="LightingSupport" parent="." instance=ExtResource( 5 )]
 tile_grid_path = NodePath("../TileMap")
+
+[node name="Exit" parent="." instance=ExtResource( 12 )]
+position = Vector2( 320, 64 )
+screen_effects_path = NodePath("../ScreenEffects")
 
 [node name="Plates" type="Node2D" parent="."]
 
@@ -112,52 +117,51 @@ tile_grid = NodePath("../../TileMap")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 256, 128 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 320, 128 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 448, 768 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy4" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 576 )
-frame = 0
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy5" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 640, 704 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 896 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 704, 1024 )
+frame = 2
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 
 [node name="LampEnemy1" parent="Enemies" instance=ExtResource( 10 )]
 position = Vector2( 768, 384 )
-frame = 1
 player_path = NodePath("../../Player")
 tile_grid_path = NodePath("../../TileMap")
 directionFacing = Vector2( 0, -1 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 64, 384 )
-frame = 2
 tile_grid_path = NodePath("../TileMap")
 
 [node name="ScreenEffects" parent="." instance=ExtResource( 11 )]
