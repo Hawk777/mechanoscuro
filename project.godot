@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 
 Constants="*res://constants.gd"
 RememberedTiles="*res://restart_support/remembered_tiles.gd"
+MusicPlayer="res://music/music_player.tscn"
 
 [display]
 
