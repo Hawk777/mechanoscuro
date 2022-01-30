@@ -54,7 +54,7 @@ position = Vector2( 64, 64 )
 
 tile_grid_path = NodePath("../TileMap")
 
-[node name="FogOfWar" parent="." instance=ExtResource( 10 )]
+[node name="ScreenEffects" parent="." instance=ExtResource( 10 )]
 tile_grid_path = NodePath("../TileMap")
 player_path = NodePath("../Player")
 
