@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
-onready var _master_bus_index := AudioServer.get_bus_index(\"master\")
+onready var _master_bus_index := AudioServer.get_bus_index(\"Master\")
 
 func _ready() -> void:
 	var _cross := get_node(\"Cross\") as TextureButton
