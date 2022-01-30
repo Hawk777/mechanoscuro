@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://door/door.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://tiles/tileset.tres" type="TileSet" id=6]
 [ext_resource path="res://lighting/lighting_support.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/dead_overlay.tscn" type="PackedScene" id=8]
+[ext_resource path="res://enemy/enemy.tscn" type="PackedScene" id=9]
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,6 +29,11 @@ tile_grid_path = NodePath("../TileMap")
 position = Vector2( 448, 192 )
 tile_grid = NodePath("../../TileMap")
 
+[node name="DeadlyDoor" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 640, 320 )
+is_open = true
+tile_grid = NodePath("../../TileMap")
+
 [node name="Plates" type="Node2D" parent="."]
 
 [node name="PressurePlate" parent="Plates" instance=ExtResource( 3 )]
@@ -35,6 +41,11 @@ position = Vector2( 128, 128 )
 
 [node name="DeathPlate" parent="Plates" instance=ExtResource( 3 )]
 position = Vector2( 448, 256 )
+
+[node name="Enemy" parent="." instance=ExtResource( 9 )]
+position = Vector2( 640, 320 )
+player_path = NodePath("../Player")
+tile_grid_path = NodePath("../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
@@ -47,5 +58,6 @@ tile_grid_path = NodePath("../TileMap")
 
 [connection signal="pressed" from="Plates/PressurePlate" to="TileMap" method="toggle_light"]
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/Door" method="toggle"]
+[connection signal="pressed" from="Plates/PressurePlate" to="Doors/DeadlyDoor" method="toggle"]
 [connection signal="pressed" from="Plates/DeathPlate" to="Player" method="kill"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
