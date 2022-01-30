@@ -12,7 +12,7 @@ var _alive := true
 var _frozen := false
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
-onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer
+onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer2D
 
 func _ready() -> void:
 	_dead_player.stream=dead_sound
@@ -48,14 +48,14 @@ func _unhandled_input(event: InputEvent) -> void:
 					new_tile.occupant = self
 					emit_signal("moved")
 				else:
-					kill()
+					kill(false)
 
 
 func freeze() -> void:
 	_frozen = true
 
 
-func kill() -> void:
+func kill(_killed_by_door: bool) -> void:
 	if _alive:
 		_alive = false
 		_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = null

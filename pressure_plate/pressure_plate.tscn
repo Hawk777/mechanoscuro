@@ -23,8 +23,8 @@ export(AudioStream) var press_sound
 export(AudioStream) var release_sound
 
 onready var _sprite = get_node(\"Sprite\") as Sprite
-onready var _pressed_player = get_node(\"PressedPlayer\") as AudioStreamPlayer
-onready var _released_player = get_node(\"ReleasedPlayer\") as AudioStreamPlayer
+onready var _pressed_player = get_node(\"PressedPlayer\") as AudioStreamPlayer2D
+onready var _released_player = get_node(\"ReleasedPlayer\") as AudioStreamPlayer2D
 
 func _ready() -> void:
 	_sprite.texture = up_texture
@@ -44,7 +44,7 @@ func _on_released() -> void:
 	emit_signal(\"released\")
 "
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["pressure-plates"]]
 script = SubResource( 1 )
 up_texture = ExtResource( 3 )
 down_texture = ExtResource( 2 )
@@ -56,10 +56,10 @@ release_sound = ExtResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 offset = Vector2( 32, 32 )
 
-[node name="PressedPlayer" type="AudioStreamPlayer" parent="."]
+[node name="PressedPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = "SFX"
 
-[node name="ReleasedPlayer" type="AudioStreamPlayer" parent="."]
+[node name="ReleasedPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = "SFX"
 
 [connection signal="pressed" from="Steppable" to="." method="_on_pressed"]

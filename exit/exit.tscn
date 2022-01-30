@@ -39,7 +39,7 @@ func _find_player_ancestor_of(node: Node) -> Player:
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="Exit" type="Sprite"]
+[node name="Exit" type="Sprite" groups=["exits"]]
 texture = ExtResource( 1 )
 centered = false
 script = SubResource( 2 )
@@ -51,7 +51,7 @@ monitorable = false
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 bus = "SFX"
 
