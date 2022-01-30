@@ -45,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Constants="*res://constants.gd"
+RememberedTiles="*res://restart_support/remembered_tiles.gd"
 
 [display]
 
