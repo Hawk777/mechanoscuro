@@ -54,6 +54,10 @@ var _alive := true
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 
 
+func _ready() -> void:
+	_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = self
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _alive:
 		var motion := Vector2.ZERO
@@ -69,13 +73,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			var new_pos := global_position + motion
 			var new_grid := _tile_grid.world_to_map(_tile_grid.to_local(new_pos))
 			if _tile_grid.coord_is_passable(new_grid.x, new_grid.y):
+				var old_grid := _tile_grid.world_to_map(_tile_grid.to_local(global_position))
 				global_position = new_pos
-				emit_signal(\"moved\")
+				_tile_grid.get_tilev(old_grid).occupant = null
+				var new_tile := _tile_grid.get_tilev(new_grid)
+				if new_tile.occupant == null:
+					new_tile.occupant = self
+					emit_signal(\"moved\")
+				else:
+					kill()
 
 
 func kill() -> void:
 	if _alive:
 		_alive = false
+		_tile_grid.get_tilev(_tile_grid.world_to_map(_tile_grid.to_local(global_position))).occupant = null
 		emit_signal(\"death_started\")
 		self.play(\"explode\")
 		yield(self, \"animation_finished\")

@@ -14,6 +14,10 @@ var alert #if it sees the player/the player isn't in darkness, this is true.  Al
 var preferredAxis # preferred movement axis, for making enemies move how they're supposed to.
 
 
+func _ready() -> void:
+	tilemap.get_tilev(tilemap.world_to_map(tilemap.to_local(global_position))).occupant = self
+
+
 func checkMoveX():
 	if player.position.x - position.x > 10:
 		#10 is a sample value
@@ -46,7 +50,7 @@ func _on_Player_moved():
 			motion = checkMoveY()
 			if motion==Vector2.ZERO:
 				motion=checkMoveX()
-		self.position+=motion
+		_move_by(motion)
 	# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
 	# possibly just cheat and check exactly 3 or 4 tiles in each direction?  That should probably work, even if it's not all the way accurate
 		var playerPos = tilemap.world_to_map(player.position)
@@ -65,9 +69,23 @@ func _on_Player_moved():
 			play("idle")
 
 
+func _move_by(motion: Vector2) -> void:
+	if motion != Vector2.ZERO:
+		var old_grid := tilemap.world_to_map(tilemap.global_to_local(global_position))
+		var old_tile := tilemap.get_tilev(old_grid)
+		position += motion
+		var new_grid := tilemap.world_to_map(tilemap.global_to_local(global_position))
+		var new_tile := tilemap.get_tilev(new_grid)
+		old_tile.occupant = null
+		if new_tile.occupant != null:
+			new_tile.occupant.kill()
+		new_tile.occupant = self
+
+
 func kill():
 	if _alive:
 		_alive = false
+		tilemap.get_tilev(tilemap.world_to_map(tilemap.to_local(global_position))).occupant = null
 		self.play("explode")
 		yield(self, "animation_finished")
 		self.visible = false
