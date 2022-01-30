@@ -11,7 +11,6 @@ var light_toggles := false
 var xPos;
 var yPos;
 var isOccupied=false;
-var wall_tile=false;
 var passable=true;
 
 
