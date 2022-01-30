@@ -117,7 +117,6 @@ __meta__ = {
 [node name="MuteButton" parent="." instance=ExtResource( 2 )]
 
 [node name="StoryPanel" type="Panel" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -140,7 +139,7 @@ margin_bottom = 353.0
 custom_fonts/font = ExtResource( 5 )
 text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:
 
-Beware the land of life and death.  Beware their chaos and malaise, lest it take you in and show you your end.
+    Beware the land of life and death.  Beware their chaos and malaise, lest it take you in and show you your end.
 
 This warning proved to be too enticing, and you could not help but wonder: where did life come from, and where did it go?  Why did death persist in following it?  Your peers refuse to entertain such questions, so you must ponder them alone, with only the land to answer.  So you set off, seeking out the entrancing truth of the old places, where life used to be.  Your pilgrimage was fruitful, and brought you deep into blasphemous places.  To commemorate, you thought to bring back a trinket for study.
 
