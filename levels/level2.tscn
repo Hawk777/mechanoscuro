@@ -65,7 +65,6 @@ tile_grid_path = NodePath("../../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 192, 64 )
-frame = 2
 tile_grid_path = NodePath("../TileMap")
 
 [node name="DeadOverlay" parent="." instance=ExtResource( 8 )]
@@ -73,3 +72,10 @@ tile_grid_path = NodePath("../TileMap")
 [node name="RestartSupport" parent="." instance=ExtResource( 5 )]
 
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
+[connection signal="moved" from="Player" to="Enemies/Enemy1" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy2" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy3" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy4" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy5" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy6" method="_on_Player_moved"]
+[connection signal="moved" from="Player" to="Enemies/Enemy7" method="_on_Player_moved"]

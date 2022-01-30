@@ -104,11 +104,11 @@ func kill() -> void:
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 32 )
 
-[node name="Node2D" type="AnimatedSprite"]
+[node name="Node2D2" type="AnimatedSprite"]
 position = Vector2( 0, -1 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 1
+frame = 2
 playing = true
 centered = false
 script = SubResource( 10 )

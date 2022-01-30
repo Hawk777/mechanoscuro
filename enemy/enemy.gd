@@ -11,7 +11,7 @@ onready var tilemap := get_node(tile_grid_path) as TileGrid
 var _alive := true
 var lastKnownCoords # Vector2 for where the player was last seen
 var alert #if it sees the player/the player isn't in darkness, this is true.  Also set the animation to/from alert/idle.
-var preferredAxis # preferred movement axis, for making enemies move how they're supposed to.
+var preferredAxis="y" # preferred movement axis, for making enemies move how they're supposed to.
 
 
 func _ready() -> void:
@@ -19,18 +19,24 @@ func _ready() -> void:
 
 
 func checkMoveX():
-	if player.global_position.x - global_position.x > 10:
+	var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
+	var player_tile := tilemap.get_tilev(player_grid)
+	var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
+	if player.global_position.x - global_position.x > 10 and tilemap.coord_is_passable(self_grid.x+1,self_grid.y):
 		#10 is a sample value
 		return Vector2(Constants.TILE_SIZE, 0)
-	elif player.global_position.x - global_position.x < -10:
+	elif player.global_position.x - global_position.x < -10 and tilemap.coord_is_passable(self_grid.x-1,self_grid.y):
 		return Vector2(-Constants.TILE_SIZE, 0)
 	return Vector2.ZERO
 	
 func checkMoveY():
-	if player.global_position.y - global_position.y > 10:
+	var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
+	var player_tile := tilemap.get_tilev(player_grid)
+	var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
+	if player.global_position.y - global_position.y > 10 and tilemap.coord_is_passable(self_grid.x,self_grid.y+1):
 		#10 is a sample value
 		return Vector2(0, Constants.TILE_SIZE)
-	elif player.global_position.y - global_position.y < -10:
+	elif player.global_position.y - global_position.y < -10 and tilemap.coord_is_passable(self_grid.x,self_grid.y-1):
 		return Vector2(0, -Constants.TILE_SIZE)
 	return Vector2.ZERO
 	
@@ -54,35 +60,37 @@ func _on_Player_moved():
 			_move_by(motion)
 		# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
 		# possibly just cheat and check exactly 3 or 4 tiles in each direction?  That should probably work, even if it's not all the way accurate
-			var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
-			var player_tile := tilemap.get_tilev(player_grid)
-			var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
-			if abs(player_grid.x-self_grid.x) < 4 and abs(player_grid.y) < 10 and player_tile.isLit:
-				alert=true
-				play("alert")
-				lastKnownCoords=player_grid
-				#lastKnownCoords currently doesn't do anything.
-			if abs(player_grid.y-self_grid.y) < 4 and abs(player_grid.x) < 10 and player_tile.isLit:
-				alert=true
-				play("alert")
-				lastKnownCoords=player_grid
+		var player_grid := tilemap.world_to_map(tilemap.to_local(player.global_position))
+		var player_tile := tilemap.get_tilev(player_grid)
+		var self_grid := tilemap.world_to_map(tilemap.to_local(global_position))
+		if abs(player_grid.x-self_grid.x) < 4 and player_grid.y==self_grid.y and player_tile.isLit:
+			alert=true
+			play("alert")
+			lastKnownCoords=player_grid
+			#lastKnownCoords currently doesn't do anything.
+		if abs(player_grid.y-self_grid.y) < 4 and player_grid.x==self_grid.x and player_tile.isLit:
+			alert=true
+			play("alert")
+			lastKnownCoords=player_grid
 		# check to see if Player is in darkness.  If so, turn off alert and update animation.
-			if !player_tile.isLit:
-				alert=false
-				play("idle")
+		if !player_tile.isLit:
+			alert=false
+			play("idle")
 
 
 func _move_by(motion: Vector2) -> void:
 	if motion != Vector2.ZERO:
 		var old_grid := tilemap.world_to_map(tilemap.to_local(global_position))
 		var old_tile := tilemap.get_tilev(old_grid)
-		position += motion
-		var new_grid := tilemap.world_to_map(tilemap.to_local(global_position))
-		var new_tile := tilemap.get_tilev(new_grid)
-		old_tile.occupant = null
-		if new_tile.occupant != null:
-			new_tile.occupant.kill()
-		new_tile.occupant = self
+		#check if there's a wall in that direction
+		if tilemap.coord_is_passable(old_grid.x+motion[0]/64, old_grid.y+motion[1]/64):
+			position += motion
+			var new_grid := tilemap.world_to_map(tilemap.to_local(global_position))
+			var new_tile := tilemap.get_tilev(new_grid)
+			old_tile.occupant = null
+			if new_tile.occupant != null:
+				new_tile.occupant.kill()
+			new_tile.occupant = self
 
 
 func kill():
