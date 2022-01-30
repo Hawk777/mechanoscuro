@@ -22,3 +22,4 @@ func _on_Player_moved():
 					flip_h=false
 			new_pos = self.position + directionFacing*Constants.TILE_SIZE
 		_move_by(directionFacing*Constants.TILE_SIZE)
+		emit_signal("enemy_moved")

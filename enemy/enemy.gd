@@ -69,6 +69,7 @@ func _on_Player_moved():
 					motion=checkMoveX()
 			_move_by(motion)
 			if motion!=Vector2.ZERO:
+				emit_signal("enemy_moved")
 				step_player.play()
 		# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
 		# possibly just cheat and check exactly 3 or 4 tiles in each direction?  That should probably work, even if it's not all the way accurate
