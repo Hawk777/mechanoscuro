@@ -15,6 +15,7 @@ enum _PixelValue {
 export(NodePath) var tile_grid_path: NodePath
 export(NodePath) var player_path: NodePath
 export(float) var blurred_mipmap_lod := 1.0
+export(float) var brightness := 0.0
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 onready var _player := get_node(player_path) as Player
@@ -48,9 +49,13 @@ func _ready() -> void:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		enemy.connect("moved", self, "refresh")
 
+	# Start the fade-in.
+	$AnimationPlayer.play("FadeIn")
+
 
 func _process(_delta: float) -> void:
 	# Update dynamic shader parameters.
+	material.set_shader_param("brightness", brightness)
 	var _screen_size := get_viewport().size
 	var _camera_aimed_at := _camera.get_camera_screen_center()
 	var _top_left_corner := _camera_aimed_at - _screen_size / 2
@@ -74,6 +79,20 @@ func _process(_delta: float) -> void:
 
 	# Refresh the fog if needed.
 	_refresh()
+
+
+func fade_out() -> void:
+	# Begins a fadeout.
+	# Returns a coroutine that completes once the fadeout is complete.
+	var player := $AnimationPlayer as AnimationPlayer
+	var start_time: float
+	if player.current_animation != "":
+		start_time = player.current_animation_position
+	else:
+		start_time = 0.0
+	player.play_backwards("FadeIn")
+	player.advance(start_time)
+	yield($AnimationPlayer, "animation_finished")
 
 
 func refresh() -> void:

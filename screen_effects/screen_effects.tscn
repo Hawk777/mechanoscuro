@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://screen_effects/screen_effects.gd" type="Script" id=1]
 
@@ -39,9 +39,27 @@ shader_param/brightness = null
 shader_param/screen_scale = null
 shader_param/screen_offset = null
 
+[sub_resource type="Animation" id=4]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:brightness")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [node name="FogOfWar" type="Sprite"]
 material = SubResource( 3 )
 scale = Vector2( 1024, 640 )
 centered = false
 script = ExtResource( 1 )
 blurred_mipmap_lod = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 4 )
