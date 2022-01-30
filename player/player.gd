@@ -28,6 +28,10 @@ func get_coordinates() -> Vector2:
 func get_object_coordinates(obj) -> Vector2:
 	return _tile_grid.world_to_map(_tile_grid.to_local(obj.global_position))
 
+func get_tile() -> Tile:
+	return _tile_grid.get_tilev(get_coordinates())
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if _alive and not _frozen:
 		var motion := Vector2.ZERO
