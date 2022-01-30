@@ -51,6 +51,7 @@ tile_grid_path = NodePath("../TileMap")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 64, 64 )
+
 tile_grid_path = NodePath("../TileMap")
 
 [node name="FogOfWar" parent="." instance=ExtResource( 10 )]
@@ -67,3 +68,4 @@ tile_grid_path = NodePath("../TileMap")
 [connection signal="pressed" from="Plates/PressurePlate" to="Doors/DeadlyDoor" method="toggle"]
 [connection signal="pressed" from="Plates/DeathPlate" to="Player" method="kill"]
 [connection signal="death_finished" from="Player" to="DeadOverlay" method="show"]
+[connection signal="moved" from="Player" to="Enemy" method="_on_Player_moved"]
