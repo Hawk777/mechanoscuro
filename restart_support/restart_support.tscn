@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://restart_support/overlay.png" type="Texture" id=1]
-[ext_resource path="res://fonts/COUR.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Silver.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 "
 
 [sub_resource type="DynamicFont" id=2]
-size = 30
+size = 40
 font_data = ExtResource( 2 )
 
 [node name="Node2D" type="CanvasLayer"]
@@ -42,7 +42,6 @@ script = SubResource( 1 )
 delay_seconds = 0.5
 
 [node name="Overlay" type="TextureRect" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 1 )
@@ -64,9 +63,9 @@ __meta__ = {
 
 [node name="ReloadingLabel" type="Label" parent="Overlay"]
 margin_left = 230.0
-margin_top = 297.0
-margin_right = 768.0
-margin_bottom = 337.0
+margin_top = 303.0
+margin_right = 795.0
+margin_bottom = 355.0
 rect_min_size = Vector2( 565, 52 )
 custom_fonts/font = SubResource( 2 )
 text = "Reloading..."
