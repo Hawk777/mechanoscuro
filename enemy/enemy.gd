@@ -16,7 +16,7 @@ func checkMoveX():
 		return Vector2(Constants.TILE_SIZE, 0)
 	elif player.position.x - position.x < -10:
 		return Vector2(-Constants.TILE_SIZE, 0)
-	return Vector2(0,0)
+	return Vector2.ZERO
 	
 func checkMoveY():
 	if player.position.y - position.y > 10:
@@ -24,7 +24,7 @@ func checkMoveY():
 		return Vector2(0, Constants.TILE_SIZE)
 	elif player.position.y - position.y < -10:
 		return Vector2(0, -Constants.TILE_SIZE)
-	return Vector2(0,0)
+	return Vector2.ZERO
 	
 
 # each turn: move, THEN determine if player is in darkness, and if so turn off alert.
@@ -36,11 +36,11 @@ func _on_Player_moved():
 		#move toward player on preferred axis
 		if preferredAxis=="x":
 			motion = checkMoveX()
-			if motion==Vector2(0,0):
+			if motion==Vector2.ZERO:
 				motion=checkMoveY()
 		if preferredAxis=="y":
 			motion = checkMoveY()
-			if motion==Vector2(0,0):
+			if motion==Vector2.ZERO:
 				motion=checkMoveX()
 		self.position+=motion
 	# check to see if Player is in light and in line of sight.  If so, turn on alert and update animation and update lastKnownCoords
