@@ -115,6 +115,10 @@ __meta__ = {
 }
 
 [node name="MuteButton" parent="." instance=ExtResource( 2 )]
+margin_left = -206.0
+margin_top = -203.0
+margin_right = -142.0
+margin_bottom = -139.0
 
 [node name="StoryPanel" type="Panel" parent="."]
 visible = false
@@ -132,11 +136,13 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="StoryPanel"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -375.5
-margin_top = 18.0
-margin_right = 385.5
-margin_bottom = 353.0
+anchor_bottom = 0.5
+margin_left = -370.0
+margin_top = -176.0
+margin_right = 370.0
+margin_bottom = 199.0
 custom_fonts/font = ExtResource( 5 )
 text = "From the first time you took in the energy to awaken, from the first time your central processor sent instructions to your metallic limbs, a single warning permeated your hard drive:
 
@@ -185,12 +191,13 @@ __meta__ = {
 
 [node name="TopLabel" type="Label" parent="CreditPanel"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.229
-margin_left = -371.0
-margin_top = 15.0
-margin_right = 372.0
-margin_bottom = -6.502
+anchor_bottom = 0.5
+margin_left = -371.5
+margin_top = -104.0
+margin_right = 371.5
+margin_bottom = -71.0
 custom_fonts/font = ExtResource( 5 )
 text = "- a game made for Global Game Jam 2022 -"
 align = 1
@@ -218,12 +225,13 @@ __meta__ = {
 
 [node name="MiddleLabel" type="Label" parent="CreditPanel"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.229
-margin_left = -100.0
-margin_top = 43.0
-margin_right = 100.0
-margin_bottom = 129.498
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -76.0
+margin_right = 102.0
+margin_bottom = 65.0
 custom_fonts/font = ExtResource( 5 )
 text = "
 Programming and UI:
@@ -231,8 +239,8 @@ Hawk777
 Derya Aydede
 Alex Gagne
 
-
-Silver font by Poppy Works"
+Silver font by Poppy Works
+The Led Display St font by Soulthype"
 align = 1
 valign = 1
 __meta__ = {
