@@ -79,3 +79,5 @@ drag_margin_v_enabled = true
 [node name="DeadPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 11 )
 bus = "SFX"
+
+[node name="Tween" type="Tween" parent="."]
