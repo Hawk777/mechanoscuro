@@ -16,14 +16,20 @@ onready var _in_game := [_fast, _panic, _slow]
 
 
 func _process(delta: float) -> void:
-	var player := get_tree().get_nodes_in_group("player").pop_back() as Player
-	if player == null:
-		_process_for_menu(delta, not _last_was_menu)
-		_last_was_menu = true
+	if get_tree().get_nodes_in_group("no-music").empty():
+		var player := get_tree().get_nodes_in_group("player").pop_back() as Player
+		if player == null:
+			_process_for_menu(delta, not _last_was_menu)
+			_last_was_menu = true
+		else:
+			var enemies = get_tree().get_nodes_in_group("enemies")
+			_process_for_level(delta, player, enemies, _last_was_menu)
+			_last_was_menu = false
 	else:
-		var enemies = get_tree().get_nodes_in_group("enemies")
-		_process_for_level(delta, player, enemies, _last_was_menu)
-		_last_was_menu = false
+		for i in _in_game:
+			var clip := i as AudioStreamPlayer
+			clip.stop()
+		_menu.stop()
 
 
 func _process_for_menu(delta: float, first: bool) -> void:

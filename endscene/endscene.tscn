@@ -9,7 +9,7 @@
 [ext_resource path="res://pressure_plate/release.ogg" type="AudioStream" id=7]
 [ext_resource path="res://endscene/endscene.gd" type="Script" id=8]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" groups=["no-music"]]
 script = ExtResource( 8 )
 switch_unpress = ExtResource( 7 )
 monster_dealert = ExtResource( 6 )
