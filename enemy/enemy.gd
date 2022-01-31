@@ -243,6 +243,9 @@ func move():
 				#old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
 				#old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
 			#))
+			
+			emit_signal("moved")
+			
 		else:
 			# it is possible for enemies to be stuck. if they become stuck, they will execute this code
 			pass

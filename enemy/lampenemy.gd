@@ -81,7 +81,7 @@ func move():
 				nextDirection=Vector2(nextDirection.y,-nextDirection.x) # if my math is right, this will rotate it 90 degrees
 				new_pos = self.position + nextDirection*Constants.TILE_SIZE
 		_move_by(nextDirection*Constants.TILE_SIZE)
-		emit_signal("enemy_moved")
+		emit_signal("moved")
 		directionFacing=nextDirection
 		if directionFacing.x+directionFacing.y<0:
 			flip_h=true
