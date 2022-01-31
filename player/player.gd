@@ -76,19 +76,26 @@ func run_turn(new_coord, new_tile):
 	
 func toggle_doors_and_lighting() -> void:
 	_tile_grid.toggle_light_new()
-	for d in get_tree().get_nodes_in_group("doors"):
+	
+	var doors = get_tree().get_nodes_in_group("doors")
+	
+	for d in doors:
 		d.toggle_new()
+		var tile = _tile_grid.get_tilev(d._tile_position)
+		if !d.is_open && tile.occupant != null:
+			tile.occupant.kill(true)
 
 func move_lamp_enemies(plate_lookup) -> int:
 	var toggles := 0
 
 	for e in get_tree().get_nodes_in_group("lamp-enemies"):
-		var old_coord = get_object_coordinates(e)
-		e.move()
-		var new_coord = get_object_coordinates(e)
-		if new_coord != old_coord:
-			if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
-				toggles = toggles + 1
+		if e._alive:
+			var old_coord = get_object_coordinates(e)
+			e.move()
+			var new_coord = get_object_coordinates(e)
+			if new_coord != old_coord:
+				if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
+					toggles = toggles + 1
 	
 	return toggles
 
@@ -96,12 +103,13 @@ func move_reg_enemies(plate_lookup) -> int:
 	var toggles := 0
 
 	for e in get_tree().get_nodes_in_group("non-lamp-enemies"):
-		var old_coord = get_object_coordinates(e)
-		e.move()
-		var new_coord = get_object_coordinates(e)
-		if new_coord != old_coord:
-			if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
-				toggles = toggles + 1
+		if e._alive:
+			var old_coord = get_object_coordinates(e)
+			e.move()
+			var new_coord = get_object_coordinates(e)
+			if new_coord != old_coord:
+				if plate_lookup.has(new_coord) && !plate_lookup.has(old_coord):
+					toggles = toggles + 1
 	
 	return toggles
 
