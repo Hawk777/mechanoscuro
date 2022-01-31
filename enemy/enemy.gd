@@ -2,8 +2,6 @@ extends AnimatedSprite
 
 class_name enemy
 
-signal moved()
-
 export(NodePath) var player_path
 export(NodePath) var tile_grid_path
 export(AudioStream) var alert_sound
@@ -14,6 +12,7 @@ onready var dealert_player = get_node("MonsterDeAlertPlayer") as AudioStreamPlay
 onready var step_player = get_node("MonsterStepPlayer") as AudioStreamPlayer2D
 onready var player := get_node(player_path) as Node2D
 onready var tile_grid := get_node(tile_grid_path) as TileGrid
+onready var tween_move :=get_node("Tween") as Tween
 
 const MAX_INT := 9223372036854775807
 const PRINT_DEBUG := false
@@ -195,6 +194,9 @@ func find_best_path_to_player():
 	else:
 		return null
 	
+func _on_Player_moved():
+	pass
+	
 func move():
 	if !_alive:
 		return
@@ -227,20 +229,20 @@ func move():
 			if move_to_tile.occupant != null:
 				move_to_tile.occupant.kill(false)
 			move_to_tile.occupant = self
-
 			var old_position = global_position
 			
 			if PRINT_DEBUG:
 				print(old_position)
 				print("x: " + str(move_to_tile.xPos) + " y: " + str(move_to_tile.yPos))
 				
-			global_position = Vector2(
+			#global_position = Vector2(
+				#old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
+				#old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
+			#)
+			lerp_move(Vector2(
 				old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
 				old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
-			)
-			
-			emit_signal("moved")
-
+			))
 		else:
 			# it is possible for enemies to be stuck. if they become stuck, they will execute this code
 			pass
@@ -257,3 +259,7 @@ func kill(_killed_by_door: bool):
 		yield(self, "animation_finished")
 		self.visible = false
 		self.queue_free()
+
+func lerp_move(var end):
+	tween_move.interpolate_property(self,"position",global_position,end,0.2,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween_move.start()

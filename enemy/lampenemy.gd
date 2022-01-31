@@ -12,7 +12,7 @@ func _move_by(motion: Vector2) -> void:
 		var old_tile := tile_grid.get_tilev(old_grid)
 		#check if there's a wall in that direction
 		if tile_grid.coord_is_passable(old_grid.x+motion[0]/64, old_grid.y+motion[1]/64):
-			position += motion
+			lerp_move(position+motion)
 			var new_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 			var new_tile := tile_grid.get_tilev(new_grid)
 			old_tile.occupant = null
@@ -62,6 +62,9 @@ func _ready():
 	# light up adjacent spaces
 	light()
 
+func _on_Player_moved():
+	pass
+	
 func move():
 	if directionFacing!=Vector2(0,0):
 		# check that the tile immediately in front of this has no collision box.  If so, advance.  If not, multiply directionFacing by -1 and advance.
@@ -77,7 +80,7 @@ func move():
 				nextDirection=Vector2(nextDirection.y,-nextDirection.x) # if my math is right, this will rotate it 90 degrees
 				new_pos = self.position + nextDirection*Constants.TILE_SIZE
 		_move_by(nextDirection*Constants.TILE_SIZE)
-		emit_signal("moved")
+		emit_signal("enemy_moved")
 		directionFacing=nextDirection
 		if directionFacing.x+directionFacing.y<0:
 			flip_h=true
@@ -85,3 +88,7 @@ func move():
 			flip_h=false
 		if _alive:
 			light()
+
+func lerp_move(var end):
+	tween_move.interpolate_property(self,"position",global_position,end,0.2,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween_move.start()

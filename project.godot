@@ -50,7 +50,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Mechanoscuro"
+config/name="GGJ 2022"
 run/main_scene="res://main_menu/main_menu.tscn"
 config/icon="res://icon.png"
 

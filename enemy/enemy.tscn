@@ -105,3 +105,5 @@ bus = "SFX"
 
 [node name="MonsterDieDoor" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="."]
