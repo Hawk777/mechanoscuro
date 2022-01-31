@@ -52,6 +52,7 @@ extents = Vector2( 32, 32 )
 [node name="Node2D" type="AnimatedSprite"]
 frames = SubResource( 2 )
 animation = "idle"
+frame = 2
 playing = true
 centered = false
 script = SubResource( 1 )
@@ -61,3 +62,22 @@ script = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 32, 32 )
 shape = SubResource( 6 )
+<<<<<<< Updated upstream
+=======
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 32, 32 )
+current = true
+limit_left = -32
+limit_top = -32
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
+[node name="DeadPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 11 )
+bus = "SFX"
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_tween_complete"]
+>>>>>>> Stashed changes
