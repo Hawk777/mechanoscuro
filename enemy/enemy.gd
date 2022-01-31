@@ -2,6 +2,8 @@ extends AnimatedSprite
 
 class_name enemy
 
+signal moved()
+
 export(NodePath) var player_path
 export(NodePath) var tile_grid_path
 export(AudioStream) var alert_sound
@@ -236,6 +238,8 @@ func move():
 				old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
 				old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
 			)
+			
+			emit_signal("moved")
 
 		else:
 			# it is possible for enemies to be stuck. if they become stuck, they will execute this code
