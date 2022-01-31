@@ -1,6 +1,5 @@
 extends Node2D
 
-export(PackedScene) var main_menu: PackedScene
 export(AudioStream) var switch_unpress
 export(AudioStream) var monster_dealert
 export(AudioStream) var monster_alert
@@ -70,6 +69,7 @@ func _on_Timer_timeout():
 			check+=1
 			timer.start(8)
 		7:
+			var main_menu := ResourceLoader.load("res://main_menu/main_menu.tscn") as PackedScene
 			get_tree().change_scene_to(main_menu)
 func _on_FadeTimer_timeout():
 	print("fade")
