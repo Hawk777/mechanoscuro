@@ -13,6 +13,8 @@ var _frozen := false
 
 onready var _tile_grid := get_node(tile_grid_path) as TileGrid
 onready var _dead_player = get_node("DeadPlayer") as AudioStreamPlayer2D
+onready var tween_move = get_node("Tween") as Tween
+var moving :=false
 
 func _ready() -> void:
 	_dead_player.stream=dead_sound
@@ -33,7 +35,7 @@ func get_tile() -> Tile:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _alive and not _frozen:
+	if _alive and not _frozen and not moving:
 		var motion := Vector2.ZERO
 		if event.is_action_pressed("move_down"):
 			motion = Vector2(0, Constants.TILE_SIZE)
@@ -48,7 +50,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			var new_grid := _tile_grid.world_to_map(_tile_grid.to_local(new_pos))
 			if _tile_grid.coord_is_passable(new_grid.x, new_grid.y):
 				var old_grid := _tile_grid.world_to_map(_tile_grid.to_local(global_position))
-				global_position = new_pos
+				#global_position = new_pos
+				lerp_move(new_pos)
 				_tile_grid.get_tilev(old_grid).occupant = null
 				var new_tile := _tile_grid.get_tilev(new_grid)
 				if new_tile.occupant == null:
@@ -118,3 +121,10 @@ func kill(_killed_by_door: bool) -> void:
 		yield(self, "animation_finished")
 		self.visible = false
 		emit_signal("death_finished")
+
+func lerp_move(var end):
+	moving=true
+	tween_move.interpolate_property(self,"position",global_position,end,0.2,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween_move.start()
+func _on_tween_complete():
+	moving=false
