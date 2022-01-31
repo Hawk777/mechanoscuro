@@ -1,4 +1,6 @@
 *.translation
 /.import/
 /.mono/
-/exports/
+/exports/html5/
+/exports/linux/
+/exports/windows/
