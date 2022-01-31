@@ -12,7 +12,8 @@ func _move_by(motion: Vector2) -> void:
 		var old_tile := tile_grid.get_tilev(old_grid)
 		#check if there's a wall in that direction
 		if tile_grid.coord_is_passable(old_grid.x+motion[0]/64, old_grid.y+motion[1]/64):
-			lerp_move(position+motion)
+			position+=motion
+			#lerp_move(position+motion)
 			var new_grid := tile_grid.world_to_map(tile_grid.to_local(global_position))
 			var new_tile := tile_grid.get_tilev(new_grid)
 			old_tile.occupant = null

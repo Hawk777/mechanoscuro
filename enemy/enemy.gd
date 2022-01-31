@@ -235,14 +235,14 @@ func move():
 				print(old_position)
 				print("x: " + str(move_to_tile.xPos) + " y: " + str(move_to_tile.yPos))
 				
-			#global_position = Vector2(
-				#old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
-				#old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
-			#)
-			lerp_move(Vector2(
+			global_position = Vector2(
 				old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
 				old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
-			))
+			)
+			#lerp_move(Vector2(
+				#old_position.x + (Constants.TILE_SIZE * (move_to_tile.xPos - old_tile.xPos)),
+				#old_position.y + (Constants.TILE_SIZE * (move_to_tile.yPos - old_tile.yPos))
+			#))
 		else:
 			# it is possible for enemies to be stuck. if they become stuck, they will execute this code
 			pass

@@ -50,16 +50,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			var new_grid := _tile_grid.world_to_map(_tile_grid.to_local(new_pos))
 			if _tile_grid.coord_is_passable(new_grid.x, new_grid.y):
 				var old_grid := _tile_grid.world_to_map(_tile_grid.to_local(global_position))
-				#global_position = new_pos
-				lerp_move(new_pos)
+				global_position = new_pos
 				_tile_grid.get_tilev(old_grid).occupant = null
 				var new_tile := _tile_grid.get_tilev(new_grid)
 				if new_tile.occupant == null:
 					new_tile.occupant = self
+					#lerp_move(new_pos)
 					emit_signal("moved")
 					run_turn(new_grid, new_tile)
 				else:
 					kill(false)
+				
 
 func run_turn(new_coord, new_tile):
 	var plate_lookup = {}
